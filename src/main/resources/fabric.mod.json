@@ -1,33 +1,30 @@
 {
     "schemaVersion": 1,
-    "id": "template",
+    "id": "inscribed",
     "version": "${version}",
-    "name": "Template",
+    "name": "Inscribed",
     "description": "This is an example description! Tell everyone what your mod is about!",
     "authors": [
-        "Me!"
+        "Kognition",
+        "AcoYT"
     ],
-    "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
-    },
-    "license": "CC0-1.0",
+    "license": "ARR",
     "icon": "assets/template/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.template.impl.Template"
+            "net.kognition.inscribed.impl.Inscribed"
         ],
         "client": [
-            "com.example.template.impl.TemplateClient"
+            "net.kognition.inscribed.impl.InscribedClient"
         ],
         "fabric-datagen": [
-            "com.example.template.data.TemplateDatagen"
+            "net.kognition.inscribed.data.InscribedDatagen"
         ]
     },
-    "accessWidener": "template.classtweaker",
+    "accessWidener": "inscribed.classtweaker",
     "mixins": [
-        "template.mixins.json"
+        "inscribed.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.19.0",

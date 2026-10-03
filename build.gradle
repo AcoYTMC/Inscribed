@@ -41,13 +41,13 @@ repositories {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/template.classtweaker")
+    accessWidenerPath = file("src/main/resources/inscribed.classtweaker")
 }
 
 fabricApi {
 	configureDataGeneration {
 		client = true
-		modId = "template"
+		modId = "inscribed"
 	}
 }
 

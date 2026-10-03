@@ -1,6 +1,6 @@
 {
     "required": true,
-    "package": "com.example.template.mixin",
+    "package": "net.kognition.inscribed.mixin",
     "compatibilityLevel": "JAVA_25",
     "mixins": [],
     "client": [],
