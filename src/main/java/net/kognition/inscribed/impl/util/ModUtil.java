@@ -10,5 +10,5 @@ public class ModUtil {
     public static final int[] BOTTOM = new int[]{120, 64};
     public static final int[] RIGHT = new int[]{149, 35};
 
-    public static final int[] BIG = new int[]{112, 27};
+    public static final int[] BIG = new int[]{111, 26};
 }

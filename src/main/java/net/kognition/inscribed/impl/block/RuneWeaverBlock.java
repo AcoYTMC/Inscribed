@@ -1,8 +1,8 @@
 package net.kognition.inscribed.impl.block;
 
 import net.kognition.inscribed.impl.block.entity.RuneWeaverBlockEntity;
+import net.kognition.inscribed.impl.index.ModStats;
 import net.minecraft.core.BlockPos;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -34,9 +34,9 @@ public class RuneWeaverBlock extends BaseEntityBlock {
     }
 
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof RuneWeaverBlockEntity weaverBlock && weaverBlock.getActiveEntity() == null) {
             player.openMenu(getMenuProvider(state, level, pos));
-            player.awardStat(Stats.INTERACT_WITH_SMITHING_TABLE);
+            player.awardStat(ModStats.INTERACT_WITH_RUNE_WEAVER);
         }
 
         return InteractionResult.SUCCESS;

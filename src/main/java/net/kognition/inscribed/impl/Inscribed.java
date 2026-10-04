@@ -16,6 +16,7 @@ public class Inscribed implements ModInitializer {
         ModCreativeModeTabs.init();
         ModItems.init();
         ModMenuTypes.init();
+        ModStats.init();
     }
 
     public static Identifier id(String path) {

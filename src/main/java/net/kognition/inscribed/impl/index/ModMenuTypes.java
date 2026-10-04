@@ -2,7 +2,7 @@ package net.kognition.inscribed.impl.index;
 
 import net.acoyt.acornlib.api.registrants.MenuTypeRegistrant;
 import net.kognition.inscribed.impl.Inscribed;
-import net.kognition.inscribed.impl.block.entity.RuneWeaverMenu;
+import net.kognition.inscribed.impl.inventories.RuneWeaverMenu;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.MenuType;
 
