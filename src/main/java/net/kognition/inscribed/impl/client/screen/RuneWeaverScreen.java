@@ -2,8 +2,10 @@ package net.kognition.inscribed.impl.client.screen;
 
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.ModItems;
-import net.kognition.inscribed.impl.inventories.RuneWeaverMenu;
+import net.kognition.inscribed.impl.inventory.RuneWeaverMenu;
 import net.kognition.inscribed.impl.util.ModUtil;
+import net.kognition.inscribed.impl.util.data.PearlType;
+import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
@@ -25,7 +27,7 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
     private static final Identifier BACKGROUND = Inscribed.id("textures/gui/sprites/container/rune_weaver/rune_weaver.png");
     private static final Identifier INFO = Inscribed.id("textures/gui/sprites/container/rune_weaver/info.png");
 
-    private static final Identifier PEARL = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl.png");
+    private static final Identifier PEARL = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl/default.png");
     private static final Identifier PEARL_SMALL = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl_small.png");
 
     private final CyclingSlotBackground filterIcon = new CyclingSlotBackground(2);
@@ -92,6 +94,8 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
 
     private void extractPearls(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         ItemStack pearl = this.menu.pearlSlot.getItem();
+        ItemStack filter = this.menu.filterSlot.getItem();
+        List<PearlType> pearlTypes = PearlTypeReloadListener.getFromVariables(filter);
 
         if (!pearl.isEmpty()) {
             graphics.blit(
@@ -101,6 +105,22 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
                     32, 32,
                     32, 32
             );
+        }
+
+        if (!pearlTypes.isEmpty() && !pearl.isEmpty()) {
+            int[][] indexed = new int[][]{ModUtil.TOP, ModUtil.RIGHT, ModUtil.BOTTOM, ModUtil.LEFT};
+
+            PearlType type = pearlTypes.getFirst();
+
+            for (int i = 0; i < type.pearls().size(); i++) {
+                graphics.blit(
+                        RenderPipelines.GUI_TEXTURED, PEARL_SMALL,
+                        this.leftPos + indexed[i][0], this.topPos + indexed[i][1],
+                        0.0F, 0.0F,
+                        16, 16,
+                        16, 16
+                );
+            }
         }
     }
 }

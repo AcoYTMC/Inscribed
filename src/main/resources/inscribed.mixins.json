@@ -1,10 +1,12 @@
 {
-    "required": true,
-    "package": "net.kognition.inscribed.mixin",
-    "compatibilityLevel": "JAVA_25",
-    "mixins": [],
-    "client": [],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "package": "net.kognition.inscribed.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "FallingBlockEntityMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
     }
 }

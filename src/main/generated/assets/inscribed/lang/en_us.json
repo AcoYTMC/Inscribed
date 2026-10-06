@@ -3,5 +3,12 @@
   "container.inscribed.rune_weaver": "Rune Weaver",
   "item.inscribed.pearl": "Pearl",
   "item.inscribed.rune": "Rune",
-  "itemGroup.inscribed": "Inscribed"
+  "itemGroup.inscribed": "Inscribed",
+  "subtitles.inscribed.block.rune_weaver.break": "Rune Weaver broken",
+  "subtitles.inscribed.block.rune_weaver.confirm": "Rune Weaver confirms pearl",
+  "subtitles.inscribed.block.rune_weaver.deselect": "Rune Weaver deselects pearl",
+  "subtitles.inscribed.block.rune_weaver.open": "Rune Weaver opens",
+  "subtitles.inscribed.block.rune_weaver.place": "Rune Weaver placed",
+  "subtitles.inscribed.block.rune_weaver.select": "Rune Weaver selects pearl",
+  "subtitles.inscribed.block.rune_weaver.unavailable": "Rune Weaver pearl is unavailable"
 }

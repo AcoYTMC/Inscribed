@@ -1,6 +1,7 @@
-package net.kognition.inscribed.impl.inventories.slot;
+package net.kognition.inscribed.impl.inventory.slot;
 
-import net.kognition.inscribed.impl.inventories.RuneWeaverMenu;
+import net.kognition.inscribed.impl.inventory.RuneWeaverMenu;
+import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -15,7 +16,7 @@ public class FilterSlot extends Slot {
     }
 
     public boolean mayPlace(ItemStack itemStack) {
-        return super.mayPlace(itemStack) && itemStack.isDamageableItem() && menu.runeSlot.hasItem();
+        return super.mayPlace(itemStack) && itemStack.isDamageableItem() && PearlTypeReloadListener.isInAny(itemStack) && menu.runeSlot.hasItem();
     }
 
     public void onTake(Player player, ItemStack carried) {

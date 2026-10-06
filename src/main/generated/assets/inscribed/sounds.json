@@ -1,0 +1,50 @@
+{
+  "block.rune_weaver.break": {
+    "sounds": [
+      "inscribed:block/rune_weaver/break1",
+      "inscribed:block/rune_weaver/break2",
+      "inscribed:block/rune_weaver/break3"
+    ],
+    "subtitle": "subtitles.inscribed.block.rune_weaver.break"
+  },
+  "block.rune_weaver.confirm": {
+    "sounds": [
+      "inscribed:block/rune_weaver/confirm"
+    ],
+    "subtitle": "subtitles.inscribed.block.rune_weaver.confirm"
+  },
+  "block.rune_weaver.deselect": {
+    "sounds": [
+      "inscribed:block/rune_weaver/deselect"
+    ],
+    "subtitle": "subtitles.inscribed.block.rune_weaver.deselect"
+  },
+  "block.rune_weaver.open": {
+    "sounds": [
+      "inscribed:block/rune_weaver/open"
+    ],
+    "subtitle": "subtitles.inscribed.block.rune_weaver.open"
+  },
+  "block.rune_weaver.place": {
+    "sounds": [
+      "inscribed:block/rune_weaver/place1",
+      "inscribed:block/rune_weaver/place2",
+      "inscribed:block/rune_weaver/place3"
+    ],
+    "subtitle": "subtitles.inscribed.block.rune_weaver.place"
+  },
+  "block.rune_weaver.select": {
+    "sounds": [
+      "inscribed:block/rune_weaver/select1",
+      "inscribed:block/rune_weaver/select2",
+      "inscribed:block/rune_weaver/select3"
+    ],
+    "subtitle": "subtitles.inscribed.block.rune_weaver.select"
+  },
+  "block.rune_weaver.unavailable": {
+    "sounds": [
+      "inscribed:block/rune_weaver/unavailable"
+    ],
+    "subtitle": "subtitles.inscribed.block.rune_weaver.unavailable"
+  }
+}

@@ -4,6 +4,7 @@ import net.acoyt.acornlib.api.block.WrappedBlock;
 import net.acoyt.acornlib.api.registrants.BlockRegistrant;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.block.RuneWeaverBlock;
+import net.kognition.inscribed.impl.util.ModUtil;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -16,7 +17,8 @@ public interface ModBlocks {
 
     WrappedBlock<Block> RUNE_WEAVER = BLOCKS.registerWithItem("rune_weaver",
             RuneWeaverBlock::new,
-            BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE));
+            BlockBehaviour.Properties.ofFullCopy(Blocks.BLACKSTONE)
+                    .sound(ModUtil.SOUND_TYPE));
 
     static void init() {}
 }

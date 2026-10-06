@@ -1,0 +1,14 @@
+{
+  "pearls": [
+    {
+      "temp": true
+    },
+    {
+      "temp": false
+    },
+    {
+      "temp": true
+    }
+  ],
+  "targetTag": "minecraft:chest_armor"
+}
