@@ -13,20 +13,14 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
-import java.util.List;
-
 /**
  * @author AcoYT
  */
-public record PearlType(TagKey<Item> targetTag, List<Pearl> pearls) {
+public record PearlType(TagKey<Item> targetTag, PearlCategory category) {
     public static final Codec<PearlType> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TagKey.codec(Registries.ITEM).fieldOf("targetTag").forGetter(PearlType::targetTag),
-            Pearl.CODEC.listOf().fieldOf("pearls").forGetter(PearlType::pearls)
+            PearlCategory.CODEC.fieldOf("category").forGetter(PearlType::category)
     ).apply(instance, PearlType::new));
-
-    public PearlType(TagKey<Item> targetTag) {
-        this(targetTag, List.of());
-    }
 
     public static final Codec<Holder<PearlType>> CODEC = RegistryCodecs.holder(Inscribed.PEARL_DATA_KEY, DIRECT_CODEC);
     public static final Codec<HolderSet<PearlType>> LIST_CODEC = RegistryCodecs.holderSet(Inscribed.PEARL_DATA_KEY);

@@ -6,7 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DynamicOps;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.ModSounds;
-import net.kognition.inscribed.impl.inventory.RuneWeaverMenu;
+import net.kognition.inscribed.impl.menu.RuneWeaverMenu;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
@@ -24,14 +24,6 @@ import java.util.Map;
  * @author AcoYT
  */
 public class ModUtil {
-    // Pearl Coordinates
-    public static final int[] TOP = new int[]{119, 5};
-    public static final int[] LEFT = new int[]{90, 34};
-    public static final int[] BOTTOM = new int[]{119, 63};
-    public static final int[] RIGHT = new int[]{148, 34};
-
-    public static final int[] BIG = new int[]{111, 26};
-
     public static final SoundType SOUND_TYPE = new SoundType(
             SoundType.GILDED_BLACKSTONE.getVolume(),
             SoundType.GILDED_BLACKSTONE.getPitch(),

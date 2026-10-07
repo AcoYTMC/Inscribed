@@ -1,6 +1,6 @@
-package net.kognition.inscribed.impl.inventory.slot;
+package net.kognition.inscribed.impl.menu.slot;
 
-import net.kognition.inscribed.impl.inventory.RuneWeaverMenu;
+import net.kognition.inscribed.impl.menu.RuneWeaverMenu;
 import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;

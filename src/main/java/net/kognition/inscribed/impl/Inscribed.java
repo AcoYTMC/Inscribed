@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.kognition.inscribed.impl.index.*;
+import net.kognition.inscribed.impl.networking.ModNetworking;
 import net.kognition.inscribed.impl.util.data.PearlType;
 import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.core.Registry;
@@ -20,7 +21,7 @@ public class Inscribed implements ModInitializer {
     public static final ResourceKey<Registry<PearlType>> PEARL_DATA_KEY = ResourceKey.createRegistryKey(id(PearlTypeReloadListener.PATH));
 
     public void onInitialize() {
-        /* Initialization */
+        // Initialization
         ModBlockEntities.init();
         ModBlocks.init();
         ModCreativeModeTabs.init();
@@ -29,7 +30,10 @@ public class Inscribed implements ModInitializer {
         ModSounds.init();
         ModStats.init();
 
-        /* Reload Listeners */
+        // Networking
+        ModNetworking.registerCommon();
+
+        // Reload Listeners
         ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(id(PearlTypeReloadListener.PATH), new PearlTypeReloadListener());
 
         DynamicRegistries.registerSynced(PEARL_DATA_KEY, PearlType.DIRECT_CODEC);

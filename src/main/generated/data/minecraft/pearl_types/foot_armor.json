@@ -1,14 +1,4 @@
 {
-  "pearls": [
-    {
-      "temp": true
-    },
-    {
-      "temp": false
-    },
-    {
-      "temp": true
-    }
-  ],
+  "category": "preservation",
   "targetTag": "minecraft:foot_armor"
 }

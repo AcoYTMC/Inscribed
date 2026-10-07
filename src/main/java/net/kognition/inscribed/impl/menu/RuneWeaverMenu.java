@@ -1,11 +1,16 @@
-package net.kognition.inscribed.impl.inventory;
+package net.kognition.inscribed.impl.menu;
 
+import net.kognition.inscribed.api.menu.TickableMenu;
+import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.block.entity.RuneWeaverBlockEntity;
 import net.kognition.inscribed.impl.index.ModBlocks;
 import net.kognition.inscribed.impl.index.ModMenuTypes;
-import net.kognition.inscribed.impl.inventory.slot.FilterSlot;
-import net.kognition.inscribed.impl.inventory.slot.PearlSlot;
-import net.kognition.inscribed.impl.inventory.slot.RuneSlot;
+import net.kognition.inscribed.impl.menu.slot.FilterSlot;
+import net.kognition.inscribed.impl.menu.slot.PearlSlot;
+import net.kognition.inscribed.impl.menu.slot.RuneSlot;
+import net.kognition.inscribed.impl.util.data.PearlPlacement;
+import net.kognition.inscribed.impl.util.data.PearlType;
+import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,11 +19,12 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.Nullable;
 
 /**
  * @author AcoYT
  */
-public class RuneWeaverMenu extends AbstractContainerMenu {
+public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMenu {
     private final Container pearlInventory = new SimpleContainer(1) {
         public void setChanged() {
             super.setChanged();
@@ -45,6 +51,9 @@ public class RuneWeaverMenu extends AbstractContainerMenu {
 
     public final ContainerLevelAccess access;
 
+    public @Nullable PearlPlacement selected = null;
+    public @Nullable PearlType type = null;
+
     public RuneWeaverMenu(int containerId, Inventory inventory) {
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
@@ -64,6 +73,18 @@ public class RuneWeaverMenu extends AbstractContainerMenu {
                 weaverBlock.setActiveEntity(inventory.player);
             }
         });
+    }
+
+    public void tick(Player player) {
+        PearlType pearlType = PearlTypeReloadListener.getFromVariables(filterSlot.getItem());
+
+        if (pearlType != type) {
+            type = pearlType;
+            if (type != null) selected = PearlPlacement.TOP;
+
+            String env = player.level().isClientSide() ? "[CLIENT]" : "[SERVER]";
+            Inscribed.LOGGER.info("{}: Set type to {}", env, type == null ? "null" : type.targetTag().location().toString());
+        }
     }
 
     public void slotsChanged(Container container) {

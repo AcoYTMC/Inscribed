@@ -55,15 +55,13 @@ public class PearlTypeReloadListener extends SimpleReloadListener<Map<Identifier
         return false;
     }
 
-    public static List<PearlType> getFromVariables(ItemStack stack) {
-        List<PearlType> pearlTypes = new ArrayList<>();
-
+    public static PearlType getFromVariables(ItemStack stack) {
         for (PearlType type : TYPES.values()) {
             if (stack.is(type.targetTag())) {
-                pearlTypes.add(type);
+                return type;
             }
         }
 
-        return pearlTypes;
+        return null;
     }
 }

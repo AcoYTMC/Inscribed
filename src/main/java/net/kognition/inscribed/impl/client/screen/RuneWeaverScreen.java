@@ -1,11 +1,12 @@
 package net.kognition.inscribed.impl.client.screen;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.ModItems;
-import net.kognition.inscribed.impl.inventory.RuneWeaverMenu;
-import net.kognition.inscribed.impl.util.ModUtil;
-import net.kognition.inscribed.impl.util.data.PearlType;
-import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
+import net.kognition.inscribed.impl.menu.RuneWeaverMenu;
+import net.kognition.inscribed.impl.networking.serverbound.SetSelectedPayload;
+import net.kognition.inscribed.impl.util.data.PearlCategory;
+import net.kognition.inscribed.impl.util.data.PearlPlacement;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
@@ -27,8 +28,8 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
     private static final Identifier BACKGROUND = Inscribed.id("textures/gui/sprites/container/rune_weaver/rune_weaver.png");
     private static final Identifier INFO = Inscribed.id("textures/gui/sprites/container/rune_weaver/info.png");
 
-    private static final Identifier PEARL = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl/default.png");
     private static final Identifier PEARL_SMALL = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl_small.png");
+    private static final Identifier PEARL_OUTLINE = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl_outline.png");
 
     private final CyclingSlotBackground filterIcon = new CyclingSlotBackground(2);
 
@@ -52,6 +53,16 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
         super.extractRenderState(graphics, mouseX, mouseY, a);
         this.extractInfoTooltip(graphics, mouseX, mouseY);
         this.extractPearls(graphics, mouseX, mouseY, a);
+
+        graphics.fill(mouseX - 2, mouseY - 2, mouseX + 2, mouseY + 2, 0xFFFFFFFF);
+
+        for (PearlPlacement selected : PearlPlacement.values()) {
+            if (selected == PearlPlacement.BIG) return;
+            if (selected.isHovered(this.leftPos, this.topPos, mouseX, mouseY)) {
+                ClientPlayNetworking.send(new SetSelectedPayload(selected));
+                menu.selected = selected;
+            }
+        }
     }
 
     public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
@@ -94,32 +105,44 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
 
     private void extractPearls(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         ItemStack pearl = this.menu.pearlSlot.getItem();
-        ItemStack filter = this.menu.filterSlot.getItem();
-        List<PearlType> pearlTypes = PearlTypeReloadListener.getFromVariables(filter);
 
-        if (!pearl.isEmpty()) {
-            graphics.blit(
-                    RenderPipelines.GUI_TEXTURED, PEARL,
-                    this.leftPos + ModUtil.BIG[0], this.topPos + ModUtil.BIG[1],
-                    0.0F, 0.0F,
-                    32, 32,
-                    32, 32
-            );
-        }
+        if (menu.type != null && menu.selected != null && !pearl.isEmpty()) {
+            PearlCategory category = menu.type.category();
+            Identifier bigTexture = category.getTexture(menu.selected);
 
-        if (!pearlTypes.isEmpty() && !pearl.isEmpty()) {
-            int[][] indexed = new int[][]{ModUtil.TOP, ModUtil.RIGHT, ModUtil.BOTTOM, ModUtil.LEFT};
-
-            PearlType type = pearlTypes.getFirst();
-
-            for (int i = 0; i < type.pearls().size(); i++) {
+            if (bigTexture != null) {
                 graphics.blit(
-                        RenderPipelines.GUI_TEXTURED, PEARL_SMALL,
-                        this.leftPos + indexed[i][0], this.topPos + indexed[i][1],
+                        RenderPipelines.GUI_TEXTURED, bigTexture,
+                        this.leftPos + PearlPlacement.BIG.getLocation()[0], this.topPos + PearlPlacement.BIG.getLocation()[1],
                         0.0F, 0.0F,
-                        16, 16,
-                        16, 16
+                        32, 32,
+                        32, 32
                 );
+
+                for (PearlPlacement placement : PearlPlacement.values()) {
+                    if (!category.hasPlacement(placement) || placement == PearlPlacement.BIG) continue;
+
+                    int[] location = placement.getLocation();
+                    int[] size = placement.getSize();
+
+                    if (placement.isHovered(this.leftPos, this.topPos, mouseX, mouseY)) {
+                        graphics.blit(
+                                RenderPipelines.GUI_TEXTURED, PEARL_OUTLINE,
+                                this.leftPos + location[0], this.topPos + location[1],
+                                0.0F, 0.0F,
+                                size[0], size[1],
+                                size[0], size[1]
+                        );
+                    }
+
+                    graphics.blit(
+                            RenderPipelines.GUI_TEXTURED, PEARL_SMALL,
+                            this.leftPos + location[0], this.topPos + location[1],
+                            0.0F, 0.0F,
+                            size[0], size[1],
+                            size[0], size[1]
+                    );
+                }
             }
         }
     }

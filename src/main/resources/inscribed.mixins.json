@@ -3,10 +3,11 @@
   "package": "net.kognition.inscribed.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "FallingBlockEntityMixin"
+    "FallingBlockEntityMixin",
+    "PlayerMixin"
   ],
   "client": [],
   "injectors": {
     "defaultRequire": 1
-    }
+  }
 }

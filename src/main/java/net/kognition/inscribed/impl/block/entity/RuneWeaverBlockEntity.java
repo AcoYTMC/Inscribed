@@ -2,7 +2,7 @@ package net.kognition.inscribed.impl.block.entity;
 
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.ModBlockEntities;
-import net.kognition.inscribed.impl.inventory.RuneWeaverMenu;
+import net.kognition.inscribed.impl.menu.RuneWeaverMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
