@@ -80,7 +80,7 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
 
         if (pearlType != type) {
             type = pearlType;
-            if (type != null) selected = PearlPlacement.TOP;
+            if (type != null) selected = PearlPlacement.BIG;
 
             String env = player.level().isClientSide() ? "[CLIENT]" : "[SERVER]";
             Inscribed.LOGGER.info("{}: Set type to {}", env, type == null ? "null" : type.targetTag().location().toString());

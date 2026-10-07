@@ -1,0 +1,6 @@
+{
+    "fabric:remove": [
+        "#minecraft:copper_ores"
+    ],
+    "values": []
+}

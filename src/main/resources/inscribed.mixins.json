@@ -1,13 +1,16 @@
 {
-  "required": true,
-  "package": "net.kognition.inscribed.mixin",
-  "compatibilityLevel": "JAVA_25",
-  "mixins": [
-    "FallingBlockEntityMixin",
-    "PlayerMixin"
-  ],
-  "client": [],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "required": true,
+    "package": "net.kognition.inscribed.mixin",
+    "compatibilityLevel": "JAVA_25",
+    "mixins": [
+        "ExperienceOrbMixin",
+        "FallingBlockEntityMixin",
+        "FeatureElementMixin",
+        "PlayerMixin",
+        "ToolMaterialMixin"
+    ],
+    "client": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }

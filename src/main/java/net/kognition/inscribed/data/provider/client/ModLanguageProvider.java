@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.kognition.inscribed.impl.index.ModBlocks;
 import net.kognition.inscribed.impl.index.ModItems;
 import net.kognition.inscribed.impl.index.ModSounds;
+import net.kognition.inscribed.impl.index.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,6 +21,8 @@ public class ModLanguageProvider extends FabricLanguageProvider {
     public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder builder) {
         ModBlocks.BLOCKS.registerLang(provider, builder);
         ModItems.ITEMS.registerLang(provider, builder);
+
+        ModItemTags.BUILDER.registerLang(provider, builder);
 
         builder.add("container.inscribed.rune_weaver", "Rune Weaver");
 

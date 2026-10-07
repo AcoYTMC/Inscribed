@@ -6,6 +6,7 @@ import net.kognition.inscribed.data.provider.client.ModLanguageProvider;
 import net.kognition.inscribed.data.provider.client.ModModelProvider;
 import net.kognition.inscribed.data.provider.client.ModSoundsProvider;
 import net.kognition.inscribed.data.provider.server.ModPearlTypeProvider;
+import net.kognition.inscribed.data.provider.server.tags.ModItemTagsProvider;
 
 public class InscribedDatagen implements DataGeneratorEntrypoint {
     public void onInitializeDataGenerator(FabricDataGenerator generator) {
@@ -17,6 +18,8 @@ public class InscribedDatagen implements DataGeneratorEntrypoint {
         pack.addProvider(ModSoundsProvider::new);
 
         // Server
+        pack.addProvider(ModItemTagsProvider::new);
+
         pack.addProvider(ModPearlTypeProvider::new);
     }
 }

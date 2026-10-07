@@ -38,12 +38,12 @@ public enum PearlPlacement {
         return size;
     }
 
-    public boolean isHovered(int leftPos, int topPos, int mouseX, int mouseY) {
+    public boolean isHovered(int leftPos, int topPos, double mouseX, double mouseY) {
         int left = leftPos + location[0];
         int right = leftPos + location[0] + size[0];
         int top = topPos + location[1];
-        int bottom = topPos + location[1];
+        int bottom = topPos + location[1] + size[1];
 
-        return mouseX >= left && mouseX <= right && mouseY >= bottom && mouseY <= top;
+        return mouseX >= left && mouseX <= right && mouseY <= bottom && mouseY >= top;
     }
 }
