@@ -11,11 +11,12 @@ import java.util.function.IntFunction;
  * @author AcoYT
  */
 public enum PearlPlacement {
-    TOP(0, 119, 5, 16, 16),
-    LEFT(1, 90, 34, 16, 16),
-    BOTTOM(2, 119, 63, 16, 16),
-    RIGHT(3, 148, 34, 16, 16),
-    BIG(4, 111, 26, 32, 32);
+    NONE(0, 0, 0, 0, 0),
+    TOP(1, 119, 5, 16, 16),
+    LEFT(2, 90, 34, 16, 16),
+    BOTTOM(3, 119, 63, 16, 16),
+    RIGHT(4, 148, 34, 16, 16),
+    BIG(5, 111, 26, 32, 32);
 
     private final int id;
     private final int[] location;

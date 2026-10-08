@@ -1,6 +1,172 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "inscribed:item/rune"
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_dexterity_gold"
+        },
+        "when": {
+          "category": "dexterity",
+          "name": "gold"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_dexterity_amber"
+        },
+        "when": {
+          "category": "dexterity",
+          "name": "amber"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_dexterity_ochre"
+        },
+        "when": {
+          "category": "dexterity",
+          "name": "ochre"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_dexterity_saffron"
+        },
+        "when": {
+          "category": "dexterity",
+          "name": "saffron"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_preservation_cerulean"
+        },
+        "when": {
+          "category": "preservation",
+          "name": "cerulean"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_preservation_azure"
+        },
+        "when": {
+          "category": "preservation",
+          "name": "azure"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_preservation_navy"
+        },
+        "when": {
+          "category": "preservation",
+          "name": "navy"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_preservation_turquoise"
+        },
+        "when": {
+          "category": "preservation",
+          "name": "turquoise"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_restoration_pear"
+        },
+        "when": {
+          "category": "restoration",
+          "name": "pear"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_restoration_jade"
+        },
+        "when": {
+          "category": "restoration",
+          "name": "jade"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_restoration_moss"
+        },
+        "when": {
+          "category": "restoration",
+          "name": "moss"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_restoration_olive"
+        },
+        "when": {
+          "category": "restoration",
+          "name": "olive"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_rigorous_ruby"
+        },
+        "when": {
+          "category": "rigorous",
+          "name": "ruby"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_rigorous_brick"
+        },
+        "when": {
+          "category": "rigorous",
+          "name": "brick"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_rigorous_garnet"
+        },
+        "when": {
+          "category": "rigorous",
+          "name": "garnet"
+        }
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/rune_rigorous_merlot"
+        },
+        "when": {
+          "category": "rigorous",
+          "name": "merlot"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "inscribed:item/rune"
+    },
+    "property": "inscribed:rune_data"
   }
 }

@@ -16,7 +16,7 @@ public class FilterSlot extends Slot {
     }
 
     public boolean mayPlace(ItemStack itemStack) {
-        return super.mayPlace(itemStack) && itemStack.isDamageableItem() && PearlTypeReloadListener.isInAny(itemStack) && menu.runeSlot.hasItem();
+        return super.mayPlace(itemStack) && PearlTypeReloadListener.isInAny(itemStack) && menu.runeSlot.hasItem();
     }
 
     public void onTake(Player player, ItemStack carried) {

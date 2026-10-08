@@ -26,13 +26,4 @@ public record PearlType(TagKey<Item> targetTag, PearlCategory category) {
     public static final Codec<HolderSet<PearlType>> LIST_CODEC = RegistryCodecs.holderSet(Inscribed.PEARL_DATA_KEY);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PearlType>> STREAM_CODEC = ByteBufCodecs.holderRegistry(Inscribed.PEARL_DATA_KEY);
     public static final StreamCodec<RegistryFriendlyByteBuf, HolderSet<PearlType>> LIST_STREAM_CODEC = ByteBufCodecs.holderSet(Inscribed.PEARL_DATA_KEY);
-
-    public record Pearl(boolean temp) {
-        public static final Codec<Pearl> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.BOOL.fieldOf("temp").forGetter(Pearl::temp)
-        ).apply(instance, Pearl::new));
-    }
 }
-// cerulean - protection
-// default top, then going clockwise
-// when taking, pearl decrements and rune component sets for item

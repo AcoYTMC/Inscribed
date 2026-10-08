@@ -5,6 +5,7 @@ import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.ModItems;
 import net.kognition.inscribed.impl.index.ModSounds;
 import net.kognition.inscribed.impl.menu.RuneWeaverMenu;
+import net.kognition.inscribed.impl.networking.serverbound.ApplyRunePayload;
 import net.kognition.inscribed.impl.networking.serverbound.SetSelectedPayload;
 import net.kognition.inscribed.impl.util.data.PearlCategory;
 import net.kognition.inscribed.impl.util.data.PearlPlacement;
@@ -31,10 +32,11 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
     private static final Identifier BACKGROUND = Inscribed.id("textures/gui/sprites/container/rune_weaver/rune_weaver.png");
     private static final Identifier INFO = Inscribed.id("textures/gui/sprites/container/rune_weaver/info.png");
 
-    private static final Identifier PEARL_BIG = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl/default.png");
+    private static final Identifier PEARL = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl/default.png");
+    private static final Identifier PEARL_OUTLINE = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl/default_outline.png");
 
     private static final Identifier PEARL_SMALL = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl_small.png");
-    private static final Identifier PEARL_OUTLINE = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl_outline.png");
+    private static final Identifier PEARL_SMALL_OUTLINE = Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl_small_outline.png");
 
     private final CyclingSlotBackground filterIcon = new CyclingSlotBackground(2);
 
@@ -60,23 +62,36 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
         this.extractPearls(graphics, mouseX, mouseY, a);
     }
 
+    public void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym) {
+        //
+    }
+
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
         LocalPlayer player = minecraft.player;
 
         double mouseX = event.x();
         double mouseY = event.y();
 
-        for (PearlPlacement selected : PearlPlacement.values()) {
-            if (selected == PearlPlacement.BIG) continue;
-            if (selected.isHovered(this.leftPos, this.topPos, mouseX, mouseY)) {
-                if (this.menu.selected == selected) {
-                    ClientPlayNetworking.send(new SetSelectedPayload(PearlPlacement.BIG));
-                    this.menu.selected = PearlPlacement.BIG;
-                    if (player != null) player.playSound(ModSounds.RUNE_WEAVER_DESELECT, 1.0F, 1.0F);
-                } else {
-                    ClientPlayNetworking.send(new SetSelectedPayload(selected));
-                    this.menu.selected = selected;
-                    if (player != null) player.playSound(ModSounds.RUNE_WEAVER_SELECT, 1.0F, 1.0F);
+        if (getRuneStack().isPresent()) {
+            for (PearlPlacement selected : PearlPlacement.values()) {
+                if (selected.isHovered(this.leftPos, this.topPos, mouseX, mouseY)) {
+                    if (selected == PearlPlacement.BIG) {
+                        if (menu.selected != PearlPlacement.NONE) {
+                            ClientPlayNetworking.send(new ApplyRunePayload());
+                            ClientPlayNetworking.send(new SetSelectedPayload(PearlPlacement.NONE));
+                            if (player != null) player.playSound(ModSounds.RUNE_WEAVER_CONFIRM, 1.0F, 1.0F);
+                        }
+                    } else {
+                        if (this.menu.selected == selected) {
+                            ClientPlayNetworking.send(new SetSelectedPayload(PearlPlacement.NONE));
+                            this.menu.selected = PearlPlacement.NONE;
+                            if (player != null) player.playSound(ModSounds.RUNE_WEAVER_DESELECT, 1.0F, 1.0F);
+                        } else {
+                            ClientPlayNetworking.send(new SetSelectedPayload(selected));
+                            this.menu.selected = selected;
+                            if (player != null) player.playSound(ModSounds.RUNE_WEAVER_SELECT, 1.0F, 1.0F);
+                        }
+                    }
                 }
             }
         }
@@ -125,12 +140,22 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
     private void extractPearls(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         ItemStack pearl = this.menu.pearlSlot.getItem();
 
-        if (menu.type != null && menu.selected != null && !pearl.isEmpty()) {
+        if (menu.type != null && !pearl.isEmpty()) {
             PearlCategory category = menu.type.category();
             Identifier bigTexture = category.getTexture(menu.selected);
-            if (bigTexture == null) bigTexture = PEARL_BIG;
+            if (bigTexture == null) bigTexture = PEARL;
 
             if (bigTexture != null) {
+                if (PearlPlacement.BIG.isHovered(this.leftPos, this.topPos, mouseX, mouseY)) {
+                    graphics.blit(
+                            RenderPipelines.GUI_TEXTURED, PEARL_OUTLINE,
+                            this.leftPos + PearlPlacement.BIG.getLocation()[0], this.topPos + PearlPlacement.BIG.getLocation()[1],
+                            0.0F, 0.0F,
+                            32, 32,
+                            32, 32
+                    );
+                }
+
                 graphics.blit(
                         RenderPipelines.GUI_TEXTURED, bigTexture,
                         this.leftPos + PearlPlacement.BIG.getLocation()[0], this.topPos + PearlPlacement.BIG.getLocation()[1],
@@ -140,14 +165,14 @@ public class RuneWeaverScreen extends AbstractContainerScreen<RuneWeaverMenu> {
                 );
 
                 for (PearlPlacement placement : PearlPlacement.values()) {
-                    if (!category.hasPlacement(placement) || placement == PearlPlacement.BIG) continue;
+                    if (!category.hasPlacement(placement) || placement == PearlPlacement.BIG || placement == PearlPlacement.NONE) continue;
 
                     int[] location = placement.getLocation();
                     int[] size = placement.getSize();
 
-                    if (placement.isHovered(this.leftPos, this.topPos, mouseX, mouseY)) {
+                    if (menu.selected == placement) {
                         graphics.blit(
-                                RenderPipelines.GUI_TEXTURED, PEARL_OUTLINE,
+                                RenderPipelines.GUI_TEXTURED, PEARL_SMALL_OUTLINE,
                                 this.leftPos + location[0], this.topPos + location[1],
                                 0.0F, 0.0F,
                                 size[0], size[1],

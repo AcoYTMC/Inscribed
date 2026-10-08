@@ -1,7 +1,7 @@
 # gradle
 
 .gradle/
-.idea/.run/
+.run/
 build/
 out/
 classes/

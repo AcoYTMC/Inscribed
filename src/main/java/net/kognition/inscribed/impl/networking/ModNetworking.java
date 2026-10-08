@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.kognition.inscribed.impl.networking.serverbound.ApplyRunePayload;
 import net.kognition.inscribed.impl.networking.serverbound.SetSelectedPayload;
 
 /**
@@ -26,10 +27,12 @@ public interface ModNetworking {
     class Impl implements NetworkingInitializer {
         public void registerTypes() {
             PayloadTypeRegistry.serverboundPlay().register(SetSelectedPayload.TYPE, SetSelectedPayload.CODEC);
+            PayloadTypeRegistry.serverboundPlay().register(ApplyRunePayload.TYPE, ApplyRunePayload.CODEC);
         }
 
         public void registerServerboundPackets() {
             ServerPlayNetworking.registerGlobalReceiver(SetSelectedPayload.TYPE, new SetSelectedPayload.Receiver());
+            ServerPlayNetworking.registerGlobalReceiver(ApplyRunePayload.TYPE, new ApplyRunePayload.Receiver());
         }
 
         @Environment(EnvType.CLIENT)

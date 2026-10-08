@@ -19,6 +19,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -51,7 +52,7 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
 
     public final ContainerLevelAccess access;
 
-    public @Nullable PearlPlacement selected = null;
+    public @NotNull PearlPlacement selected = PearlPlacement.NONE;
     public @Nullable PearlType type = null;
 
     public RuneWeaverMenu(int containerId, Inventory inventory) {
@@ -77,10 +78,14 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
 
     public void tick(Player player) {
         PearlType pearlType = PearlTypeReloadListener.getFromVariables(filterSlot.getItem());
+        if (runeSlot.getItem().isEmpty()) {
+            if (type != null) type = null;
+            return;
+        }
 
         if (pearlType != type) {
             type = pearlType;
-            if (type != null) selected = PearlPlacement.BIG;
+            if (type != null) selected = PearlPlacement.NONE;
 
             String env = player.level().isClientSide() ? "[CLIENT]" : "[SERVER]";
             Inscribed.LOGGER.info("{}: Set type to {}", env, type == null ? "null" : type.targetTag().location().toString());
@@ -128,8 +133,7 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
 
             slot.onQuickCraft(stack, clicked);
         } else if (!pearlSlot.hasItem() && pearlSlot.mayPlace(stack)) {
-            if (this.moveItemStackTo(stack.copyWithCount(1), 0, 1, false)) {
-                stack.shrink(1);
+            if (this.moveItemStackTo(stack, 0, 1, false)) {
                 return ItemStack.EMPTY;
             }
         } else if (!runeSlot.hasItem() && runeSlot.mayPlace(stack) && stack.getCount() == 1) {

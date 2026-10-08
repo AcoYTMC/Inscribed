@@ -11,5 +11,9 @@
   "subtitles.inscribed.block.rune_weaver.place": "Rune Weaver placed",
   "subtitles.inscribed.block.rune_weaver.select": "Rune Weaver selects pearl",
   "subtitles.inscribed.block.rune_weaver.unavailable": "Rune Weaver pearl is unavailable",
-  "tag.item.inscribed.removed": "Removed"
+  "tag.item.inscribed.dexterity_provider": "Dexterity Provider",
+  "tag.item.inscribed.preservation_provider": "Preservation Provider",
+  "tag.item.inscribed.removed": "Removed",
+  "tag.item.inscribed.restoration_provider": "Restoration Provider",
+  "tag.item.inscribed.rigorous_provider": "Rigorous Provider"
 }
