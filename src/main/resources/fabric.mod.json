@@ -3,13 +3,13 @@
     "id": "inscribed",
     "version": "${version}",
     "name": "Inscribed",
-    "description": "This is an example description! Tell everyone what your mod is about!",
+    "description": "This mod adds altered versions of pre-existing minecraft features, a new villager type, AND a rune system! The runes work as stat upgrade enchants, replacing normal enchants with more unique ones!",
     "authors": [
         "Kognition",
         "AcoYT"
     ],
     "license": "ARR",
-    "icon": "assets/template/icon.png",
+    "icon": "assets/inscribed/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
