@@ -24,6 +24,11 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .setReplace(false);
 
         this.builder(ModItemTags.DEXTERITY_PROVIDER)
+                .forceAddTag(ItemTags.HOES)
+                .forceAddTag(ItemTags.PICKAXES)
+                .forceAddTag(ItemTags.AXES)
+                .forceAddTag(ItemTags.SHOVELS)
+                .forceAddTag(ConventionalItemTags.MINING_TOOL_TOOLS)
                 .setReplace(false);
 
         this.builder(ModItemTags.PRESERVATION_PROVIDER)
@@ -39,6 +44,12 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .setReplace(false);
 
         this.builder(ModItemTags.RIGOROUS_PROVIDER)
+                .forceAddTag(ItemTags.SWORDS)
+                .forceAddTag(ConventionalItemTags.BOW_TOOLS)
+                .forceAddTag(ConventionalItemTags.CROSSBOW_TOOLS)
+                .forceAddTag(ConventionalItemTags.TRIDENT_TOOLS)
+                .forceAddTag(ConventionalItemTags.MACE_TOOLS)
+                .forceAddTag(ItemTags.SPEARS)
                 .setReplace(false);
     }
 }

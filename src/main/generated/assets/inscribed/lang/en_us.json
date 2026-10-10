@@ -15,5 +15,21 @@
   "tag.item.inscribed.preservation_provider": "Preservation Provider",
   "tag.item.inscribed.removed": "Removed",
   "tag.item.inscribed.restoration_provider": "Restoration Provider",
-  "tag.item.inscribed.rigorous_provider": "Rigorous Provider"
+  "tag.item.inscribed.rigorous_provider": "Rigorous Provider",
+  "tooltip.inscribed.dexterity.amber": "Dexterity | Amber",
+  "tooltip.inscribed.dexterity.gold": "Dexterity | Gold",
+  "tooltip.inscribed.dexterity.ochre": "Dexterity | Ochre",
+  "tooltip.inscribed.dexterity.saffron": "Dexterity | Saffron",
+  "tooltip.inscribed.preservation.azure": "Preservation | Azure",
+  "tooltip.inscribed.preservation.cerulean": "Preservation | Cerulean",
+  "tooltip.inscribed.preservation.navy": "Preservation | Navy",
+  "tooltip.inscribed.preservation.turquoise": "Preservation | Turquoise",
+  "tooltip.inscribed.restoration.jade": "Restoration | Jade",
+  "tooltip.inscribed.restoration.moss": "Restoration | Moss",
+  "tooltip.inscribed.restoration.olive": "Restoration | Olive",
+  "tooltip.inscribed.restoration.pear": "Restoration | Pear",
+  "tooltip.inscribed.rigorous.brick": "Rigorous | Brick",
+  "tooltip.inscribed.rigorous.garnet": "Rigorous | Garnet",
+  "tooltip.inscribed.rigorous.merlot": "Rigorous | Merlot",
+  "tooltip.inscribed.rigorous.ruby": "Rigorous | Ruby"
 }

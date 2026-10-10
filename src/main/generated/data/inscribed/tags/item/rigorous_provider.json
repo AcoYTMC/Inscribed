@@ -1,3 +1,10 @@
 {
-  "values": []
+  "values": [
+    "#minecraft:swords",
+    "#c:tools/bow",
+    "#c:tools/crossbow",
+    "#c:tools/trident",
+    "#c:tools/mace",
+    "#minecraft:spears"
+  ]
 }

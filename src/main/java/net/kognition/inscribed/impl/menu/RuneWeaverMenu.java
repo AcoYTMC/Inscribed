@@ -92,10 +92,6 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
         }
     }
 
-    public void slotsChanged(Container container) {
-        super.slotsChanged(container);
-    }
-
     public void removed(Player player) {
         super.removed(player);
         this.access.execute((level, pos) -> {

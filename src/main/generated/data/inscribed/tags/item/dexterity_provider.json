@@ -1,3 +1,9 @@
 {
-  "values": []
+  "values": [
+    "#minecraft:hoes",
+    "#minecraft:pickaxes",
+    "#minecraft:axes",
+    "#minecraft:shovels",
+    "#c:tools/mining_tool"
+  ]
 }
