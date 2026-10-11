@@ -10,6 +10,6 @@ import net.minecraft.world.item.ToolMaterial;
 public interface ModToolMaterials {
     ToolMaterial FLINT = new ToolMaterial(
             BlockTags.INCORRECT_FOR_STONE_TOOL,
-            131, 4.0F, 1.0F, 5, ModItemTags.HAFTED_CELT_MATERIALS
+            131, 4.5F, 1.0F, 5, ModItemTags.HAFTED_CELT_MATERIALS
     );
 }

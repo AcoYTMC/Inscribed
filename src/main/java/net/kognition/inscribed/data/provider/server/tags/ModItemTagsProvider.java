@@ -23,6 +23,10 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .add(ItemIds.STONE_AXE, ItemIds.STONE_SHOVEL, ItemIds.STONE_PICKAXE, ItemIds.STONE_HOE, ItemIds.STONE_SWORD, ItemIds.STONE_SPEAR)
                 .setReplace(false);
 
+        this.builder(ModItemTags.HAFTED_CELT_MATERIALS)
+                .add(ItemIds.FLINT)
+                .setReplace(false);
+
         this.builder(ModItemTags.DEXTERITY_PROVIDER)
                 .forceAddTag(ItemTags.HOES)
                 .forceAddTag(ItemTags.PICKAXES)
@@ -50,10 +54,6 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .forceAddTag(ConventionalItemTags.TRIDENT_TOOLS)
                 .forceAddTag(ConventionalItemTags.MACE_TOOLS)
                 .forceAddTag(ItemTags.SPEARS)
-                .setReplace(false);
-
-        this.builder(ModItemTags.HAFTED_CELT_MATERIALS)
-                .add(ItemIds.FLINT)
                 .setReplace(false);
     }
 }
