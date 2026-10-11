@@ -13,6 +13,7 @@ public interface ModItemTags {
     TagBuilder<Item> BUILDER = new TagBuilder<>(Inscribed.MOD_ID, Registries.ITEM);
 
     TagKey<Item> REMOVED = BUILDER.register("removed");
+    TagKey<Item> HAFTED_CELT_MATERIALS = BUILDER.register("hafted_celt_materials");
 
     TagKey<Item> DEXTERITY_PROVIDER = BUILDER.register("dexterity_provider");
     TagKey<Item> PRESERVATION_PROVIDER = BUILDER.register("preservation_provider");

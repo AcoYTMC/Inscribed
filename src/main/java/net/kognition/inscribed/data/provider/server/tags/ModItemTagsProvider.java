@@ -51,5 +51,9 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .forceAddTag(ConventionalItemTags.MACE_TOOLS)
                 .forceAddTag(ItemTags.SPEARS)
                 .setReplace(false);
+
+        this.builder(ModItemTags.HAFTED_CELT_MATERIALS)
+                .add(ItemIds.FLINT)
+                .setReplace(false);
     }
 }
