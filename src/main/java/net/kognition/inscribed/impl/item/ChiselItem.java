@@ -28,11 +28,12 @@ public class ChiselItem extends Item {
     }
 
     public InteractionResult useOn(UseOnContext context) {
+        ItemStack stack = context.getItemInHand();
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockState state = level.getBlockState(pos);
 
-        if (level instanceof ServerLevel serverLevel) {
+        if (level instanceof ServerLevel serverLevel && !stack.nextDamageWillBreak()) {
             Optional<RecipeHolder<StonecutterRecipe>> optionalHolder = serverLevel.recipeAccess().getRecipeFor(
                     RecipeType.STONECUTTING,
                     new SingleRecipeInput(state.getBlock().asItem().getDefaultInstance()),
@@ -41,11 +42,12 @@ public class ChiselItem extends Item {
 
             if (optionalHolder.isPresent()) {
                 StonecutterRecipe recipe = optionalHolder.get().value();
-                ItemStack stack = recipe.result.create();
+                ItemStack itemStack = recipe.result.create();
 
-                if (stack.getItem() instanceof BlockItem blockItem) {
+                if (itemStack.getItem() instanceof BlockItem blockItem) {
                     Block block = blockItem.getBlock();
                     level.setBlock(pos, copyFrom(state, block), Block.UPDATE_ALL);
+                    stack.hurtWithoutBreaking(1, context.getPlayer());
                     return InteractionResult.SUCCESS;
                 }
             }
