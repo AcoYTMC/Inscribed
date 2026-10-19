@@ -37,6 +37,7 @@ public class ModModelProvider extends FabricModelProvider {
         registerRune(generators, ModItems.RUNE);
 
         generators.generateFlatItem(ModItems.HAFTED_CELT, ModelTemplates.FLAT_HANDHELD_ITEM);
+        generators.generateFlatItem(ModItems.CHISEL, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
     public static void registerRune(ItemModelGenerators generators, Item item) {

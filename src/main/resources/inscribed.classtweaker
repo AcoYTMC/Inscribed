@@ -1,6 +1,10 @@
 classTweaker v2 official
 
+# Methods
 accessible method net/minecraft/world/item/SmithingTemplateItem createNetheriteUpgradeIconList ()Ljava/util/List;
 
 accessible method net/minecraft/world/item/component/BlockTransformers axeStrippables ()Lnet/minecraft/core/component/BlockTransformer$BlockTransformData;
 accessible method net/minecraft/world/item/component/BlockTransformers axe (Ljava/util/Set;Lnet/minecraft/core/Holder;Lnet/minecraft/core/component/BlockTransformer$TransformParticle;)Ljava/util/List;
+
+# Fields
+accessible field net/minecraft/world/item/crafting/SingleItemRecipe result Lnet/minecraft/world/item/ItemStackTemplate;
