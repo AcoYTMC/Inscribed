@@ -3,8 +3,11 @@ package net.kognition.inscribed.impl;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.kognition.inscribed.impl.client.ModItemTooltips;
 import net.kognition.inscribed.impl.client.entity.render.RuneWeaverBlockEntityRenderer;
+import net.kognition.inscribed.impl.client.item.select.ClusteredProperty;
 import net.kognition.inscribed.impl.client.item.select.RuneData;
+import net.kognition.inscribed.impl.client.math_type.MathInit;
 import net.kognition.inscribed.impl.client.screen.RuneWeaverScreen;
 import net.kognition.inscribed.impl.index.ModBlockEntities;
 import net.kognition.inscribed.impl.index.ModMenuTypes;
@@ -22,8 +25,13 @@ public class InscribedClient implements ClientModInitializer {
         BlockEntityRenderers.register(ModBlockEntities.RUNE_WEAVER, RuneWeaverBlockEntityRenderer::new);
 
         SelectItemModelProperties.ID_MAPPER.put(RuneData.ID, RuneData.TYPE);
+        SelectItemModelProperties.ID_MAPPER.put(ClusteredProperty.ID, ClusteredProperty.TYPE);
+
+        ModItemTooltips.init();
 
         // Networking
         ModNetworking.registerClient();
+
+        MathInit.bootstrap();
     }
 }

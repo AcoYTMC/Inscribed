@@ -1,9 +1,11 @@
 {
   "block.inscribed.rune_weaver": "Rune Weaver",
   "container.inscribed.rune_weaver": "Rune Weaver",
+  "item.inscribed.bloodline": "Bloodline",
   "item.inscribed.chisel": "Chisel",
   "item.inscribed.hafted_celt": "Hafted Celt",
   "item.inscribed.pearl": "Pearl",
+  "item.inscribed.rope": "Rope",
   "item.inscribed.rune": "Rune",
   "itemGroup.inscribed": "Inscribed",
   "subtitles.inscribed.block.rune_weaver.break": "Rune Weaver broken",

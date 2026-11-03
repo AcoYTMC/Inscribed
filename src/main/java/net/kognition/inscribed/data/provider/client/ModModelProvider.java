@@ -2,14 +2,19 @@ package net.kognition.inscribed.data.provider.client;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
-import net.kognition.inscribed.impl.Inscribed;
+import net.kognition.inscribed.impl.client.item.select.ClusteredProperty;
 import net.kognition.inscribed.impl.client.item.select.RuneData;
+import net.kognition.inscribed.impl.client.math_type.Between;
+import net.kognition.inscribed.impl.client.math_type.Less;
+import net.kognition.inscribed.impl.client.math_type.MathDefinition;
+import net.kognition.inscribed.impl.client.math_type.Number;
 import net.kognition.inscribed.impl.index.ModBlocks;
 import net.kognition.inscribed.impl.index.ModItems;
 import net.kognition.inscribed.impl.util.data.PearlCategory;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.renderer.item.SelectItemModel;
@@ -24,6 +29,13 @@ import java.util.List;
  * @author AcoYT
  */
 public class ModModelProvider extends FabricModelProvider {
+    private static final List<MathDefinition> CLUSTERED_VARIANTS = List.of(
+            new Less(new Number(0)), // empty case
+            new Between(new Number(0), new Number(10, true)),
+            new Between(new Number(10), new Number(20, true)),
+            new Between(new Number(20), new Number(30, true))
+    );
+
     public ModModelProvider(FabricPackOutput output) {
         super(output);
     }
@@ -36,7 +48,7 @@ public class ModModelProvider extends FabricModelProvider {
         generators.generateFlatItem(ModItems.PEARL, ModelTemplates.FLAT_ITEM);
         registerRune(generators, ModItems.RUNE);
 
-        generators.generateFlatItem(ModItems.HAFTED_CELT, ModelTemplates.FLAT_HANDHELD_ITEM);
+        registerHaftedCelt(generators, ModItems.HAFTED_CELT);
         generators.generateFlatItem(ModItems.CHISEL, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
@@ -46,7 +58,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         for (PearlCategory category : PearlCategory.values()) {
             for (String name : category.getNames()) {
-                Identifier varId = Inscribed.id("item/rune_%s_%s".formatted(category.getSerializedName(), name));
+                Identifier varId = ModelLocationUtils.getModelLocation(item, "_%s_%s".formatted(category.getSerializedName(), name));
                 ModelTemplates.FLAT_ITEM.create(varId, TextureMapping.layer0(new Material(varId)), generators.modelOutput);
 
                 switchCases.add(new SelectItemModel.SwitchCase<>(
@@ -58,6 +70,26 @@ public class ModModelProvider extends FabricModelProvider {
 
         generators.itemModelOutput.accept(item, ItemModelUtils.select(
                 new RuneData(),
+                ItemModelUtils.plainModel(fallback), switchCases
+        ));
+    }
+
+    public static void registerHaftedCelt(ItemModelGenerators generators, Item item) {
+        List<SelectItemModel.SwitchCase<Integer>> switchCases = new ArrayList<>();
+        Identifier fallback = ModelTemplates.FLAT_ITEM.create(item, TextureMapping.layer0(item), generators.modelOutput);
+
+        for (int i = 1; i < CLUSTERED_VARIANTS.size(); i++) {
+            Identifier varId = ModelLocationUtils.getModelLocation(item, "_clustered_" + i);
+            ModelTemplates.FLAT_HANDHELD_ITEM.create(varId, TextureMapping.layer0(new Material(varId)), generators.modelOutput);
+
+            switchCases.add(new SelectItemModel.SwitchCase<>(
+                    List.of(i),
+                    ItemModelUtils.plainModel(varId)
+            ));
+        }
+
+        generators.itemModelOutput.accept(item, ItemModelUtils.select(
+                new ClusteredProperty(CLUSTERED_VARIANTS),
                 ItemModelUtils.plainModel(fallback), switchCases
         ));
     }

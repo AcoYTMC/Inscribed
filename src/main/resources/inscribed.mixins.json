@@ -10,7 +10,9 @@
         "PlayerMixin",
         "ToolMaterialMixin"
     ],
-    "client": [],
+    "client": [
+        "client.GuiGraphicsExtractorMixin"
+    ],
     "injectors": {
         "defaultRequire": 1
     }

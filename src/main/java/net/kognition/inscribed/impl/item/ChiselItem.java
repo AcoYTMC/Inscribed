@@ -3,6 +3,7 @@ package net.kognition.inscribed.impl.item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,8 +33,9 @@ public class ChiselItem extends Item {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockState state = level.getBlockState(pos);
+        Player player = context.getPlayer();
 
-        if (level instanceof ServerLevel serverLevel && !stack.nextDamageWillBreak()) {
+        if (level instanceof ServerLevel serverLevel && !stack.nextDamageWillBreak() && player != null) {
             Optional<RecipeHolder<StonecutterRecipe>> optionalHolder = serverLevel.recipeAccess().getRecipeFor(
                     RecipeType.STONECUTTING,
                     new SingleRecipeInput(state.getBlock().asItem().getDefaultInstance()),
@@ -47,7 +49,7 @@ public class ChiselItem extends Item {
                 if (itemStack.getItem() instanceof BlockItem blockItem) {
                     Block block = blockItem.getBlock();
                     level.setBlock(pos, copyFrom(state, block), Block.UPDATE_ALL);
-                    stack.hurtWithoutBreaking(1, context.getPlayer());
+                    stack.hurtWithoutBreaking(1, player);
                     return InteractionResult.SUCCESS;
                 }
             }

@@ -32,5 +32,10 @@ public interface ModCreativeModeTabs {
         output.accept(ModItems.RUNE);
 
         output.accept(ModBlocks.RUNE_WEAVER.asItem());
+
+        output.accept(ModItems.ROPE);
+        output.accept(ModItems.HAFTED_CELT);
+        output.accept(ModItems.CHISEL);
+        output.accept(ModItems.BLOODLINE);
     }
 }

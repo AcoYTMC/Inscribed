@@ -1,6 +1,71 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "inscribed:item/hafted_celt"
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/hafted_celt_clustered_1"
+        },
+        "when": 1
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/hafted_celt_clustered_2"
+        },
+        "when": 2
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "inscribed:item/hafted_celt_clustered_3"
+        },
+        "when": 3
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "inscribed:item/hafted_celt"
+    },
+    "property": "inscribed:clustered",
+    "stages": [
+      {
+        "type": "minecraft:less",
+        "value": {
+          "value": 0
+        }
+      },
+      {
+        "type": "minecraft:between",
+        "max": {
+          "inclusive": true,
+          "value": 10
+        },
+        "min": {
+          "value": 0
+        }
+      },
+      {
+        "type": "minecraft:between",
+        "max": {
+          "inclusive": true,
+          "value": 20
+        },
+        "min": {
+          "value": 10
+        }
+      },
+      {
+        "type": "minecraft:between",
+        "max": {
+          "inclusive": true,
+          "value": 30
+        },
+        "min": {
+          "value": 20
+        }
+      }
+    ]
   }
 }
