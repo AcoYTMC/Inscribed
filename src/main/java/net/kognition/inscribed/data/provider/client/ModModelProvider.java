@@ -76,7 +76,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     public static void registerHaftedCelt(ItemModelGenerators generators, Item item) {
         List<SelectItemModel.SwitchCase<Integer>> switchCases = new ArrayList<>();
-        Identifier fallback = ModelTemplates.FLAT_ITEM.create(item, TextureMapping.layer0(item), generators.modelOutput);
+        Identifier fallback = ModelTemplates.FLAT_HANDHELD_ITEM.create(item, TextureMapping.layer0(item), generators.modelOutput);
 
         for (int i = 1; i < CLUSTERED_VARIANTS.size(); i++) {
             Identifier varId = ModelLocationUtils.getModelLocation(item, "_clustered_" + i);
