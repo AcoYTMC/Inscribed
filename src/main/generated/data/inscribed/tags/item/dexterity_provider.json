@@ -4,6 +4,7 @@
     "#minecraft:pickaxes",
     "#minecraft:axes",
     "#minecraft:shovels",
-    "#c:tools/mining_tool"
+    "#c:tools/mining_tool",
+    "inscribed:hafted_celt"
   ]
 }

@@ -3,6 +3,7 @@ package net.kognition.inscribed.data.provider.server.tags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.kognition.inscribed.impl.index.ref.ModItemIds;
 import net.kognition.inscribed.impl.index.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.references.ItemIds;
@@ -27,12 +28,17 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .add(ItemIds.FLINT)
                 .setReplace(false);
 
+        this.builder(ItemTags.MINING_ENCHANTABLE)
+                .add(ModItemIds.HAFTED_CELT)
+                .setReplace(false);
+
         this.builder(ModItemTags.DEXTERITY_PROVIDER)
                 .forceAddTag(ItemTags.HOES)
                 .forceAddTag(ItemTags.PICKAXES)
                 .forceAddTag(ItemTags.AXES)
                 .forceAddTag(ItemTags.SHOVELS)
                 .forceAddTag(ConventionalItemTags.MINING_TOOL_TOOLS)
+                .add(ModItemIds.HAFTED_CELT)
                 .setReplace(false);
 
         this.builder(ModItemTags.PRESERVATION_PROVIDER)
