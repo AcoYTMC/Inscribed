@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
  * @author AcoYT
  */
 public record ClusteredComponent(int charges, int maxCharges) {
-    public static final ClusteredComponent DEFAULT = new ClusteredComponent(0, 5);
+    public static final ClusteredComponent DEFAULT = new ClusteredComponent(0, 30);
 
     public static final Codec<ClusteredComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.optionalFieldOf("charges", DEFAULT.charges).forGetter(ClusteredComponent::charges),

@@ -20,6 +20,7 @@ import java.util.function.Predicate;
  */
 @Mixin(ExperienceOrb.class)
 public abstract class ExperienceOrbMixin {
+    // TODO: Make this actually correct according to Kog's request
     @WrapOperation(
             method = "repairPlayerItems",
             at = @At(
@@ -28,15 +29,18 @@ public abstract class ExperienceOrbMixin {
             )
     )
     private Optional<EnchantedItemInUse> inscribed$passiveMending(DataComponentType<?> componentType, LivingEntity source, Predicate<ItemStack> predicate, Operation<Optional<EnchantedItemInUse>> original) {
-        if (componentType == EnchantmentEffectComponents.REPAIR_WITH_XP) {
-            for (EquipmentSlot slot : EquipmentSlot.values()) {
-                ItemStack stack = source.getItemBySlot(slot);
-                if (predicate.test(stack)) {
-                    return Optional.of(new EnchantedItemInUse(stack, slot, source));
+        Optional<EnchantedItemInUse> value = original.call(componentType, source, predicate);
+        if (value.isPresent()) {
+            if (componentType == EnchantmentEffectComponents.REPAIR_WITH_XP) {
+                for (EquipmentSlot slot : EquipmentSlot.values()) {
+                    ItemStack stack = source.getItemBySlot(slot);
+                    if (predicate.test(stack)) {
+                        return Optional.of(new EnchantedItemInUse(stack, slot, source));
+                    }
                 }
             }
         }
 
-        return original.call(componentType, source, predicate);
+        return value;
     }
 }

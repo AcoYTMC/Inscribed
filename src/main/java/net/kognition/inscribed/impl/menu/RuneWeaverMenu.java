@@ -10,7 +10,6 @@ import net.kognition.inscribed.impl.menu.slot.PearlSlot;
 import net.kognition.inscribed.impl.menu.slot.RuneSlot;
 import net.kognition.inscribed.impl.util.data.PearlPlacement;
 import net.kognition.inscribed.impl.util.data.PearlType;
-import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -77,7 +76,13 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
     }
 
     public void tick(Player player) {
-        PearlType pearlType = PearlTypeReloadListener.getFromVariables(filterSlot.getItem());
+        PearlType pearlType = null;
+        for (PearlType type : player.level().registryAccess().lookupOrThrow(Inscribed.PEARL_DATA_KEY)) {
+            if (filterSlot.getItem().is(type.targetTag())) {
+                pearlType = type;
+            }
+        }
+
         if (runeSlot.getItem().isEmpty()) {
             if (type != null) type = null;
             return;

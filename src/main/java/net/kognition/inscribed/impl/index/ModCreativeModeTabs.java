@@ -1,9 +1,7 @@
 package net.kognition.inscribed.impl.index;
 
 import net.acoyt.acornlib.api.registrants.CreativeModeTabRegistrant;
-import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
-import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
 import net.kognition.inscribed.impl.Inscribed;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -21,13 +19,12 @@ public interface ModCreativeModeTabs {
     CreativeModeTab INSCRIBED = TABS.register(Inscribed.MOD_ID, FabricCreativeModeTab.builder()
             .title(Component.translatable("itemGroup.inscribed"))
             .icon(() -> new ItemStack(ModItems.RUNE))
+            .displayItems(ModCreativeModeTabs::addEntries)
             .build());
 
-    static void init() {
-        CreativeModeTabEvents.modifyOutputEvent(INSCRIBED_KEY).register(ModCreativeModeTabs::addEntries);
-    }
+    static void init() {}
 
-    private static void addEntries(FabricCreativeModeTabOutput output) {
+    private static void addEntries(CreativeModeTab.ItemDisplayParameters parameters, CreativeModeTab.Output output) {
         output.accept(ModItems.PEARL);
         output.accept(ModItems.RUNE);
 

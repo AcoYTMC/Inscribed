@@ -6,7 +6,6 @@
         "ExperienceOrbMixin",
         "FallingBlockEntityMixin",
         "FeatureElementMixin",
-        "ItemStackMixin",
         "PlayerMixin",
         "ToolMaterialMixin"
     ],

@@ -3,25 +3,21 @@ package net.kognition.inscribed.impl;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
-import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
-import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
-import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
 import net.kognition.inscribed.impl.index.*;
 import net.kognition.inscribed.impl.networking.ModNetworking;
 import net.kognition.inscribed.impl.util.data.PearlType;
-import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
 
 public class Inscribed implements ModInitializer {
     public static final String MOD_ID = "inscribed";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final ResourceKey<Registry<PearlType>> PEARL_DATA_KEY = ResourceKey.createRegistryKey(id(PearlTypeReloadListener.PATH));
+    public static final ResourceKey<Registry<PearlType>> PEARL_DATA_KEY = ResourceKey.createRegistryKey(id("pearl_types"));
 
     public void onInitialize() {
         // Initialization
@@ -38,19 +34,9 @@ public class Inscribed implements ModInitializer {
         ModNetworking.registerCommon();
 
         // Reload Listeners
-        ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(id(PearlTypeReloadListener.PATH), new PearlTypeReloadListener());
-
         DynamicRegistries.registerSynced(PEARL_DATA_KEY, PearlType.DIRECT_CODEC);
 
-        // Resource Packs
-        FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(container -> {
-            ResourceLoader.registerBuiltinPack(
-                    id("retextured_redstone"),
-                    container,
-                    Component.literal("Retextured Redstone"),
-                    PackActivationType.DEFAULT_ENABLED
-            );
-        });
+        ItemComponentTooltipProviderRegistry.addBefore(DataComponents.TROPICAL_FISH_PATTERN, ModDataComponents.RUNE);
     }
 
     public static Identifier id(String path) {

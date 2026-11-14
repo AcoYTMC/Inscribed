@@ -1,9 +1,9 @@
 package net.kognition.inscribed.impl.menu.slot;
 
+import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.menu.RuneWeaverMenu;
-import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
+import net.kognition.inscribed.impl.util.data.PearlType;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
@@ -15,12 +15,18 @@ public class FilterSlot extends Slot {
         this.menu = menu;
     }
 
+    // TODO: I have no idea how to tackle this with the way minecraft uses an interface so this'll have to do
     public boolean mayPlace(ItemStack itemStack) {
-        return super.mayPlace(itemStack) && PearlTypeReloadListener.isInAny(itemStack) && menu.runeSlot.hasItem();
-    }
+        if (super.mayPlace(itemStack) && menu.runeSlot.hasItem()) {
+            final boolean[] isInTag = {false};
+            menu.access.execute((level, _) -> {
+                for (PearlType type : level.registryAccess().lookupOrThrow(Inscribed.PEARL_DATA_KEY)) {
+                    if (itemStack.is(type.targetTag())) isInTag[0] = true;
+                }
+            });
+            return isInTag[0];
+        }
 
-    public void onTake(Player player, ItemStack carried) {
-        super.onTake(player, carried);
-        //menu.pearlSlot.setItem(0, ItemStack.EMPTY);
+        return false;
     }
 }

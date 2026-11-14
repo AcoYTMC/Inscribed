@@ -33,10 +33,10 @@ public abstract class FallingBlockEntityMixin {
     @Inject(method = "causeFallDamage", at = @At("HEAD"))
     private void inscribed$handleCracking(double fallDistance, float damageModifier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         FallingBlockEntity blockEntity = (FallingBlockEntity)(Object)this;
+        if (!blockEntity.getBlockState().is(BlockTags.ANVIL)) return;
         Level level = blockEntity.level();
 
         List<ItemEntity> entities = level.getEntitiesOfClass(ItemEntity.class, blockEntity.getBoundingBox(), e -> e.getItem().is(Items.NAUTILUS_SHELL));
-        if (entities.isEmpty() || !blockEntity.getBlockState().is(BlockTags.ANVIL)) return;
 
         for (ItemEntity entity : entities) {
             ItemStack stack = entity.getItem();
@@ -51,6 +51,7 @@ public abstract class FallingBlockEntityMixin {
             if (level instanceof ServerLevel serverLevel) {
                 entity.discard();
 
+                // TODO: do math to make it drop multiple stacks rather than changing max stack size
                 Containers.dropContents(
                         serverLevel, new BlockPos.MutableBlockPos(pos.x, pos.y, pos.z),
                         NonNullList.withSize(1, ModItems.PEARL.getDefaultInstance().copyWithCount(stack.getCount()))

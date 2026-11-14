@@ -7,4 +7,3 @@ accessible method net/minecraft/world/item/component/BlockTransformers axeStripp
 accessible method net/minecraft/world/item/component/BlockTransformers axe (Ljava/util/Set;Lnet/minecraft/core/Holder;Lnet/minecraft/core/component/BlockTransformer$TransformParticle;)Ljava/util/List;
 
 # Fields
-accessible field net/minecraft/world/item/crafting/SingleItemRecipe result Lnet/minecraft/world/item/ItemStackTemplate;

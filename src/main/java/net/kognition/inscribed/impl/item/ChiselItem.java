@@ -14,9 +14,7 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.Optional;
 
@@ -36,19 +34,20 @@ public class ChiselItem extends Item {
         Player player = context.getPlayer();
 
         if (level instanceof ServerLevel serverLevel && !stack.nextDamageWillBreak() && player != null) {
+            SingleRecipeInput input = new SingleRecipeInput(state.getBlock().asItem().getDefaultInstance());
             Optional<RecipeHolder<StonecutterRecipe>> optionalHolder = serverLevel.recipeAccess().getRecipeFor(
                     RecipeType.STONECUTTING,
-                    new SingleRecipeInput(state.getBlock().asItem().getDefaultInstance()),
+                    input,
                     serverLevel
             );
 
             if (optionalHolder.isPresent()) {
                 StonecutterRecipe recipe = optionalHolder.get().value();
-                ItemStack itemStack = recipe.result.create();
+                ItemStack itemStack = recipe.assemble(input);
 
                 if (itemStack.getItem() instanceof BlockItem blockItem) {
                     Block block = blockItem.getBlock();
-                    level.setBlock(pos, copyFrom(state, block), Block.UPDATE_ALL);
+                    level.setBlock(pos, block.withPropertiesOf(state), Block.UPDATE_ALL);
                     stack.hurtWithoutBreaking(1, player);
                     return InteractionResult.SUCCESS;
                 }
@@ -56,15 +55,5 @@ public class ChiselItem extends Item {
         }
 
         return super.useOn(context);
-    }
-
-    private static BlockState copyFrom(BlockState from, Block to) {
-        BlockState state = to.defaultBlockState();
-
-        for (Property<?> property : from.getProperties()) {
-            state = BlockBehaviour.BlockStateBase.copyProperty(from, state, property);
-        }
-
-        return state;
     }
 }

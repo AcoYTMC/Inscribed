@@ -31,13 +31,13 @@
     "property": "inscribed:clustered",
     "stages": [
       {
-        "type": "minecraft:less",
+        "type": "inscribed:less",
         "value": {
           "value": 0
         }
       },
       {
-        "type": "minecraft:between",
+        "type": "inscribed:between",
         "max": {
           "inclusive": true,
           "value": 10
@@ -47,7 +47,7 @@
         }
       },
       {
-        "type": "minecraft:between",
+        "type": "inscribed:between",
         "max": {
           "inclusive": true,
           "value": 20
@@ -57,7 +57,7 @@
         }
       },
       {
-        "type": "minecraft:between",
+        "type": "inscribed:between",
         "max": {
           "inclusive": true,
           "value": 30

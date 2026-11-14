@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.client.math_type.MathDefinition;
-import net.kognition.inscribed.impl.client.math_type.MathInit;
+import net.kognition.inscribed.impl.client.math_type.ModMathInit;
 import net.kognition.inscribed.impl.component.ClusteredComponent;
 import net.kognition.inscribed.impl.index.ModDataComponents;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -25,7 +25,7 @@ public record ClusteredProperty(List<MathDefinition> stages) implements SelectIt
     public static final Identifier ID = Inscribed.id("clustered");
 
     public static final MapCodec<ClusteredProperty> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            MathInit.CODEC.listOf().fieldOf("stages").forGetter(ClusteredProperty::stages)
+            ModMathInit.CODEC.listOf().fieldOf("stages").forGetter(ClusteredProperty::stages)
     ).apply(instance, ClusteredProperty::new));
 
     public static final Type<ClusteredProperty, Integer> TYPE = Type.create(CODEC, Codec.INT);
