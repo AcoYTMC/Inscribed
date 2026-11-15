@@ -21,28 +21,28 @@ import java.util.function.IntFunction;
  */
 public enum PearlCategory implements StringRepresentable {
     DEXTERITY(0, "dexterity",
-            new Pair("gold", 0xFFe0a727),
-            new Pair("amber", 0xFF8f6534),
-            new Pair("ochre", 0xFF884e2d),
-            new Pair("saffron", 0xFFbc9c2e)
+            new Type("gold", 0xFFe0a727),
+            new Type("amber", 0xFF8f6534),
+            new Type("ochre", 0xFF884e2d),
+            new Type("saffron", 0xFFbc9c2e)
     ),
     PRESERVATION(1, "preservation",
-            new Pair("cerulean", 0xFF308bb8),
-            new Pair("azure", 0xFF227273),
-            new Pair("navy", 0xFF2e518d),
-            new Pair("turquoise", 0xFF45a7bc)
+            new Type("cerulean", 0xFF308bb8),
+            new Type("azure", 0xFF227273),
+            new Type("navy", 0xFF2e518d),
+            new Type("turquoise", 0xFF45a7bc)
     ),
     RESTORATION(2, "restoration",
-            new Pair("pear", 0xFF4aae70),
-            new Pair("jade", 0xFF44be74),
-            new Pair("moss", 0xFF628452),
-            new Pair("olive", 0xFF8e9e1a)
+            new Type("pear", 0xFF4aae70),
+            new Type("jade", 0xFF44be74),
+            new Type("moss", 0xFF628452),
+            new Type("olive", 0xFF8e9e1a)
     ),
     RIGOROUS(3, "rigorous",
-            new Pair("ruby", 0xFFd6261c),
-            new Pair("brick", 0xFF843b2d),
-            new Pair("garnet", 0xFF8f2626),
-            new Pair("merlot", 0xFF6e2b26)
+            new Type("ruby", 0xFFd6261c),
+            new Type("brick", 0xFF843b2d),
+            new Type("garnet", 0xFF8f2626),
+            new Type("merlot", 0xFF6e2b26)
     );
 
     private static final IntFunction<PearlCategory> BY_ID = ByIdMap.continuous(e -> e.id, values(), ByIdMap.OutOfBoundsStrategy.ZERO);
@@ -53,16 +53,16 @@ public enum PearlCategory implements StringRepresentable {
     private final int id;
     private final String base;
     private final List<Identifier> textures;
-    private final List<Pair> pairs;
+    private final List<Type> types;
     private final List<String> names;
 
-    PearlCategory(int id, String base, Pair... pairs) {
-        String[] names = Arrays.stream(pairs).map(Pair::name).toArray(String[]::new);
+    PearlCategory(int id, String base, Type... types) {
+        String[] names = Arrays.stream(types).map(Type::name).toArray(String[]::new);
 
         this.id = id;
         this.base = base;
-        this.textures = fuckassTempNameTooTiredForThis(base, names);
-        this.pairs = Arrays.asList(pairs);
+        this.textures = getTexturesFromBase(base, names);
+        this.types = Arrays.asList(types);
         this.names = Arrays.asList(names);
     }
 
@@ -74,8 +74,8 @@ public enum PearlCategory implements StringRepresentable {
         return names;
     }
 
-    public List<Pair> getPairs() {
-        return pairs;
+    public List<Type> getPairs() {
+        return types;
     }
 
     /**
@@ -101,12 +101,12 @@ public enum PearlCategory implements StringRepresentable {
         };
     }
 
-    public Pair getPair(PearlPlacement selected) {
+    public Type getPair(PearlPlacement selected) {
         return switch (selected) {
-            case TOP -> pairs.getFirst();
-            case RIGHT -> pairs.get(1);
-            case LEFT -> pairs.get(2);
-            case BOTTOM -> pairs.get(3);
+            case TOP -> types.getFirst();
+            case RIGHT -> types.get(1);
+            case LEFT -> types.get(2);
+            case BOTTOM -> types.get(3);
             case null, default -> null;
         };
     }
@@ -126,7 +126,7 @@ public enum PearlCategory implements StringRepresentable {
         return base;
     }
 
-    public static List<Identifier> fuckassTempNameTooTiredForThis(String base, String... names) {
+    public static List<Identifier> getTexturesFromBase(String base, String... names) {
         List<Identifier> ids = new ArrayList<>();
         for (String name : names) {
             ids.add(Inscribed.id("textures/gui/sprites/container/rune_weaver/pearl/" + base + "/" + name + ".png"));
@@ -135,16 +135,16 @@ public enum PearlCategory implements StringRepresentable {
         return ids;
     }
 
-    public record Pair(String name, int color) {
-        public static final Codec<Pair> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.STRING.fieldOf("name").forGetter(Pair::name),
-                ExtraCodecs.ARGB_COLOR_CODEC.fieldOf("color").forGetter(Pair::color)
-        ).apply(instance, Pair::new));
+    public record Type(String name, int color) {
+        public static final Codec<Type> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.STRING.fieldOf("name").forGetter(Type::name),
+                ExtraCodecs.ARGB_COLOR_CODEC.fieldOf("color").forGetter(Type::color)
+        ).apply(instance, Type::new));
 
-        public static final StreamCodec<ByteBuf, Pair> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.STRING_UTF8, Pair::name,
-                ByteBufCodecs.INT, Pair::color,
-                Pair::new
+        public static final StreamCodec<ByteBuf, Type> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING_UTF8, Type::name,
+                ByteBufCodecs.INT, Type::color,
+                Type::new
         );
     }
 }

@@ -30,7 +30,7 @@ public record RuneData() implements SelectItemModelProperty<RuneData.Data> {
         RuneComponent component = stack.get(ModDataComponents.RUNE);
         if (component == null) return null;
 
-        return new Data(component.category(), component.pair().name());
+        return new Data(component.category(), component.type().name());
     }
 
     public Codec<Data> valueCodec() {

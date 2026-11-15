@@ -1,6 +1,7 @@
 package net.kognition.inscribed.impl.index;
 
 import net.acoyt.acornlib.api.template.RegistrantBase;
+import net.acoyt.acornlib.api.util.MiscUtils;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.kognition.inscribed.impl.Inscribed;
 import net.minecraft.core.HolderLookup;
@@ -15,7 +16,9 @@ import net.minecraft.stats.Stats;
 public interface ModStats {
     RegistrantBase<Identifier> STATS = new RegistrantBase<>(Inscribed.MOD_ID, BuiltInRegistries.CUSTOM_STAT) {
         public void registerLang(HolderLookup.Provider provider, FabricLanguageProvider.TranslationBuilder builder) {
-            //
+            this.toRegister.forEach(stat -> {
+                builder.add(stat.toLanguageKey("stat"), MiscUtils.formatString(stat.getPath()));
+            });
         }
     };
 

@@ -6,7 +6,6 @@ import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.tag.ModItemTags;
 import net.kognition.inscribed.impl.util.data.PearlCategory;
 import net.kognition.inscribed.impl.util.data.PearlType;
-import net.kognition.inscribed.impl.util.data.PearlTypeReloadListener;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
@@ -21,7 +20,7 @@ import java.util.function.BiConsumer;
  */
 public class ModPearlTypeProvider extends FabricCodecDataProvider<PearlType> {
     public ModPearlTypeProvider(FabricPackOutput packOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(packOutput, registriesFuture, PackOutput.Target.DATA_PACK, PearlTypeReloadListener.PATH, PearlType.DIRECT_CODEC);
+        super(packOutput, registriesFuture, PackOutput.Target.DATA_PACK, "pearl_types", PearlType.DIRECT_CODEC);
     }
 
     public void configure(BiConsumer<Identifier, PearlType> consumer, HolderLookup.Provider provider) {

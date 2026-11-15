@@ -21,16 +21,13 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
 
     public void addTags(HolderLookup.Provider provider) {
         this.builder(ModItemTags.REMOVED)
-                .add(ItemIds.STONE_AXE, ItemIds.STONE_SHOVEL, ItemIds.STONE_PICKAXE, ItemIds.STONE_HOE, ItemIds.STONE_SWORD, ItemIds.STONE_SPEAR)
-                .setReplace(false);
+                .add(ItemIds.STONE_AXE, ItemIds.STONE_SHOVEL, ItemIds.STONE_PICKAXE, ItemIds.STONE_HOE, ItemIds.STONE_SWORD, ItemIds.STONE_SPEAR);
 
         this.builder(ModItemTags.HAFTED_CELT_MATERIALS)
-                .add(ItemIds.FLINT)
-                .setReplace(false);
+                .add(ItemIds.FLINT);
 
         this.builder(ItemTags.MINING_ENCHANTABLE)
-                .add(ModItemIds.HAFTED_CELT)
-                .setReplace(false);
+                .add(ModItemIds.HAFTED_CELT);
 
         this.builder(ModItemTags.DEXTERITY_PROVIDER)
                 .forceAddTag(ItemTags.HOES)
@@ -38,20 +35,17 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .forceAddTag(ItemTags.AXES)
                 .forceAddTag(ItemTags.SHOVELS)
                 .forceAddTag(ConventionalItemTags.MINING_TOOL_TOOLS)
-                .add(ModItemIds.HAFTED_CELT)
-                .setReplace(false);
+                .add(ModItemIds.HAFTED_CELT);
 
         this.builder(ModItemTags.PRESERVATION_PROVIDER)
                 .forceAddTag(ConventionalItemTags.SHIELD_TOOLS)
                 .forceAddTag(ItemTags.FOOT_ARMOR)
                 .forceAddTag(ItemTags.LEG_ARMOR)
                 .forceAddTag(ItemTags.CHEST_ARMOR)
-                .forceAddTag(ItemTags.HEAD_ARMOR)
-                .setReplace(false);
+                .forceAddTag(ItemTags.HEAD_ARMOR);
 
         this.builder(ModItemTags.RESTORATION_PROVIDER)
-                .add(ItemIds.EXPERIENCE_BOTTLE)
-                .setReplace(false);
+                .add(ItemIds.EXPERIENCE_BOTTLE);
 
         this.builder(ModItemTags.RIGOROUS_PROVIDER)
                 .forceAddTag(ItemTags.SWORDS)
@@ -59,7 +53,6 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .forceAddTag(ConventionalItemTags.CROSSBOW_TOOLS)
                 .forceAddTag(ConventionalItemTags.TRIDENT_TOOLS)
                 .forceAddTag(ConventionalItemTags.MACE_TOOLS)
-                .forceAddTag(ItemTags.SPEARS)
-                .setReplace(false);
+                .forceAddTag(ItemTags.SPEARS);
     }
 }

@@ -19,22 +19,26 @@ import java.util.function.Consumer;
  * @author AcoYT
  * Completely temp for now until functionality is specified
  */
-public record RuneComponent(PearlCategory category, PearlCategory.Pair pair) implements TooltipProvider {
+public record RuneComponent(PearlCategory category, PearlCategory.Type type) implements TooltipProvider {
     public static final RuneComponent DEFAULT = new RuneComponent(PearlCategory.PRESERVATION, PearlCategory.PRESERVATION.getPairs().getFirst());
 
     public static final Codec<RuneComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             PearlCategory.CODEC.fieldOf("category").forGetter(RuneComponent::category),
-            PearlCategory.Pair.CODEC.fieldOf("pair").forGetter(RuneComponent::pair)
+            PearlCategory.Type.CODEC.fieldOf("type").forGetter(RuneComponent::type)
     ).apply(instance, RuneComponent::new));
 
     public static final StreamCodec<ByteBuf, RuneComponent> STREAM_CODEC = StreamCodec.composite(
             PearlCategory.STREAM_CODEC, RuneComponent::category,
-            PearlCategory.Pair.STREAM_CODEC, RuneComponent::pair,
+            PearlCategory.Type.STREAM_CODEC, RuneComponent::type,
             RuneComponent::new
     );
 
     public void addToTooltip(Item.TooltipContext context, Consumer<Component> consumer, TooltipFlag flag, DataComponentGetter components) {
-        consumer.accept(Component.translatable("tooltip.inscribed.%s.%s".formatted(category.getSerializedName(), pair.name())).withColor(pair.color()));
+        Component categoryName = Component.translatable("tooltip.inscribed." + category.getSerializedName());
+        Component typeName = Component.translatable("tooltip.inscribed." + category.getSerializedName() + "." + type.name());
+
+        consumer.accept(Component.translatable("tooltip.inscribed.pearl_category".formatted(categoryName, typeName)));
+        //consumer.accept(Component.translatable("tooltip.inscribed.%s.%s".formatted(category.getSerializedName(), type.name())).withColor(type.color()));
     }
 
     public static class Builder {
