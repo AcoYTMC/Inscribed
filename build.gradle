@@ -11,17 +11,10 @@ base {
 }
 
 repositories {
-    // Modrinth
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Modrinth"
-                url = "https://api.modrinth.com/maven"
-            }
-        }
-        filter {
-            includeGroup "maven.modrinth"
-        }
+    // Fzzy Config
+    maven {
+        name = "FzzyMaven"
+        url = "https://maven.fzzyhmstrs.me/"
     }
 
     // Mod Menu
@@ -37,6 +30,19 @@ repositories {
     maven {
         name = "Ladysnake Mods"
         url = 'https://maven.ladysnake.org/releases'
+    }
+
+    // Modrinth
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
     }
 }
 
@@ -68,6 +74,7 @@ dependencies {
     // Config
     api ("com.terraformersmc:modmenu:${project.modmenu_version}")
     implementation ("maven.modrinth:midnightlib:${project.midnightlib_version}")
+    implementation "me.fzzyhmstrs:fzzy_config:${project.fzzy_config_version}"
 
     // CCA
     implementation include("org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cca_version}")
