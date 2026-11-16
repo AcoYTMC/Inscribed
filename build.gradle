@@ -46,8 +46,46 @@ repositories {
     }
 }
 
+var username = "vDev"
+var uuid = null as String // Should be changed to a prop or env var
+
 loom {
     accessWidenerPath = file("src/main/resources/inscribed.classtweaker")
+
+    runs {
+        client {
+            client()
+            // If enabled this you can hotswap basally anything
+            // Requires a JetBrains runtime!
+            jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
+        }
+
+        create("FixedClient") {
+            client()
+            generateRunConfig = true
+            preferGradleTask = true
+            // If enabled this you can hotswap basally anything
+            // Requires a JetBrains runtime!
+            jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
+            programArguments.addAll("--username", username)
+            if (uuid != null) {
+                programArguments.addAll("--uuid", uuid)
+            }
+        }
+
+        create("TestWorld") {
+            client()
+            generateRunConfig = true
+            preferGradleTask = true
+            // If enabled this you can hotswap basally anything
+            // Requires a JetBrains runtime!
+            jvmArguments.add("-XX:+AllowEnhancedClassRedefinition")
+            programArguments.addAll("--quickPlaySingleplayer", "test", "--username", username)
+            if (uuid != null) {
+                programArguments.addAll("--uuid", uuid)
+            }
+        }
+    }
 }
 
 fabricApi {
