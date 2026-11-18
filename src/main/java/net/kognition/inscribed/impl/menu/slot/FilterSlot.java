@@ -1,6 +1,5 @@
 package net.kognition.inscribed.impl.menu.slot;
 
-import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.menu.RuneWeaverMenu;
 import net.kognition.inscribed.impl.util.data.PearlType;
 import net.minecraft.world.Container;
@@ -15,16 +14,11 @@ public class FilterSlot extends Slot {
         this.menu = menu;
     }
 
-    // TODO: I have no idea how to tackle this with the way minecraft uses an interface so this'll have to do
     public boolean mayPlace(ItemStack itemStack) {
         if (super.mayPlace(itemStack) && menu.runeSlot.hasItem()) {
-            final boolean[] isInTag = {false};
-            menu.access.execute((level, _) -> {
-                for (PearlType type : level.registryAccess().lookupOrThrow(Inscribed.PEARL_DATA_KEY)) {
-                    if (itemStack.is(type.targetTag())) isInTag[0] = true;
-                }
-            });
-            return isInTag[0];
+            for (PearlType type : menu.pearlGetter) {
+                if (itemStack.is(type.targetTag())) return true;
+            }
         }
 
         return false;

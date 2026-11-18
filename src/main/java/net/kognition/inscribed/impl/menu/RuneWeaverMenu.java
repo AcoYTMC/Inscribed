@@ -10,6 +10,7 @@ import net.kognition.inscribed.impl.menu.slot.PearlSlot;
 import net.kognition.inscribed.impl.menu.slot.RuneSlot;
 import net.kognition.inscribed.impl.util.data.PearlPlacement;
 import net.kognition.inscribed.impl.util.data.PearlType;
+import net.minecraft.core.Registry;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -51,6 +52,9 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
 
     public final ContainerLevelAccess access;
 
+    // Copied from LoomMenu
+    public final Registry<PearlType> pearlGetter;
+
     public @NotNull PearlPlacement selected = PearlPlacement.NONE;
     public @Nullable PearlType type = null;
 
@@ -66,6 +70,8 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
         this.runeSlot = this.addSlot(new RuneSlot(runeInventory, 0, 26, 34, this));
         this.filterSlot = this.addSlot(new FilterSlot(filterInventory, 0, 44, 34, this));
 
+        this.pearlGetter = inventory.player.registryAccess().lookupOrThrow(Inscribed.PEARL_DATA_KEY);
+
         this.addStandardInventorySlots(inventory, 8, 84);
 
         access.execute((level, pos) -> {
@@ -77,7 +83,7 @@ public class RuneWeaverMenu extends AbstractContainerMenu implements TickableMen
 
     public void tick(Player player) {
         PearlType pearlType = null;
-        for (PearlType type : player.level().registryAccess().lookupOrThrow(Inscribed.PEARL_DATA_KEY)) {
+        for (PearlType type : pearlGetter) {
             if (filterSlot.getItem().is(type.targetTag())) {
                 pearlType = type;
             }
