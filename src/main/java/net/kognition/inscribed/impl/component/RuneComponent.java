@@ -34,11 +34,10 @@ public record RuneComponent(PearlCategory category, PearlCategory.Type type) imp
     );
 
     public void addToTooltip(Item.TooltipContext context, Consumer<Component> consumer, TooltipFlag flag, DataComponentGetter components) {
-        Component categoryName = Component.translatable("tooltip.inscribed." + category.getSerializedName());
-        Component typeName = Component.translatable("tooltip.inscribed." + category.getSerializedName() + "." + type.name());
+        Component categoryName = Component.translatable("inscribed.category." + category.getSerializedName());
+        Component typeName = Component.translatable("inscribed.category." + category.getSerializedName() + "." + type.name());
 
-        consumer.accept(Component.translatable("tooltip.inscribed.pearl_category".formatted(categoryName, typeName)));
-        //consumer.accept(Component.translatable("tooltip.inscribed.%s.%s".formatted(category.getSerializedName(), type.name())).withColor(type.color()));
+        consumer.accept(Component.translatable("tooltip.inscribed.pearl_category", categoryName, typeName).withColor(type.color()));
     }
 
     public static class Builder {
