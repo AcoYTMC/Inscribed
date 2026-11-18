@@ -1,7 +1,6 @@
 package net.kognition.inscribed.impl.index;
 
 import net.acoyt.acornlib.api.registrants.ItemRegistrant;
-import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.data.ModBlockTransformers;
 import net.kognition.inscribed.impl.index.ref.ModItemIds;
@@ -12,7 +11,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ToolMaterial;
 
 import java.util.function.Function;
@@ -49,10 +47,5 @@ public interface ModItems {
         return ITEMS.register(key.identifier().getPath(), factory, properties);
     }
 
-    static void init() {
-        DefaultItemComponentEvents.MODIFY.register(ctx -> ctx.modify(
-                Items.NAUTILUS_SHELL,
-                builder -> builder.set(DataComponents.MAX_STACK_SIZE, 16) // blehhh... so what!! who cares!! I got lazy and I hate math!!
-        ));
-    }
+    static void init() {}
 }

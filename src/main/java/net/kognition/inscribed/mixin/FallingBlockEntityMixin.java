@@ -1,7 +1,6 @@
 package net.kognition.inscribed.mixin;
 
 import net.kognition.inscribed.impl.index.ModItems;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -32,7 +31,7 @@ import java.util.List;
 public abstract class FallingBlockEntityMixin {
     @Inject(method = "causeFallDamage", at = @At("HEAD"))
     private void inscribed$handleCracking(double fallDistance, float damageModifier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        FallingBlockEntity blockEntity = (FallingBlockEntity)(Object)this;
+        FallingBlockEntity blockEntity = (FallingBlockEntity) (Object) this;
         if (!blockEntity.getBlockState().is(BlockTags.ANVIL)) return;
         Level level = blockEntity.level();
 
@@ -51,16 +50,24 @@ public abstract class FallingBlockEntityMixin {
             if (level instanceof ServerLevel serverLevel) {
                 entity.discard();
 
-                // TODO: do math to make it drop multiple stacks rather than changing max stack size
-                Containers.dropContents(
-                        serverLevel, new BlockPos.MutableBlockPos(pos.x, pos.y, pos.z),
-                        NonNullList.withSize(1, ModItems.PEARL.getDefaultInstance().copyWithCount(stack.getCount()))
-                );
+                NonNullList<ItemStack> itemList = NonNullList.createWithCapacity(4);
+                var count = stack.getCount();
+                var pearl = ModItems.PEARL.getDefaultInstance();
+                var stacks = Math.floorDiv(count, 16);
+                if (stacks > 0) {
+                    for (int i = 0; i < stacks; i++) {
+                        itemList.add(pearl.copyWithCount(16));
+                    }
+                }
+                var remainder = count % 16;
+                if (remainder > 0) itemList.add(pearl.copyWithCount(remainder));
+
+                itemList.forEach(itemStack -> Containers.dropItemStack(level, pos.x, pos.y, pos.z, itemStack));
 
                 serverLevel.sendParticles(
                         new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CONDUIT.defaultBlockState()),
-                        pos.x, pos.y, pos.z,
-                        20,
+                        pos.x, pos.y + 0.125, pos.z,
+                        16 * Math.max(1, stacks),
                         0.15, 0.15, 0.15,
                         1.0
                 );
