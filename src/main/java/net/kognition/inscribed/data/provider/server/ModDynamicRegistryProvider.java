@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.data.ModBlockTransformers;
+import net.kognition.inscribed.impl.index.data.ModPearlTypes;
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,6 +19,7 @@ public class ModDynamicRegistryProvider extends FabricDynamicRegistryProvider {
 
     public void configure(HolderLookup.Provider provider, Entries entries) {
         ModBlockTransformers.BUILDER.addEntries(provider, entries);
+        ModPearlTypes.BUILDER.addEntries(provider, entries);
     }
 
     public String getName() {
