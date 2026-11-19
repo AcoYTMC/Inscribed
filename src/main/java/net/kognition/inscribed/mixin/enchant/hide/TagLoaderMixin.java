@@ -22,7 +22,7 @@ public class TagLoaderMixin {
     private String directory;
 
     @ModifyExpressionValue(method = "load", at = @At(value = "INVOKE", target = "Lnet/minecraft/tags/TagFile;entries()Ljava/util/List;"))
-    List<TagEntry> addTagEntries(List<TagEntry> original) {
+    List<TagEntry> filterTagEntries(List<TagEntry> original) {
         if (directory.equals("tags/enchantment")) {
             return original.stream().filter(tagEntry -> tagEntry instanceof TagEntryAccessor entry && (entry.inscribed$isTag() || CONFIG.isEnchantAllowed(entry.inscribed$getId()))).toList();
         }

@@ -25,7 +25,7 @@ import static net.kognition.inscribed.impl.Inscribed.CONFIG;
 @Mixin(EnchantmentHelper.class)
 public class EnchantmentHelperMixin {
     @Inject(method = "updateEnchantments", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/ItemEnchantments$Mutable;toImmutable()Lnet/minecraft/world/item/enchantment/ItemEnchantments;"))
-    private static void hideEnchantBooks(ItemStack itemStack, Consumer<ItemEnchantments.Mutable> consumer, CallbackInfoReturnable<ItemEnchantments> cir, @Local(name = "mutableEnchantments") ItemEnchantments.Mutable mutableEnchantments) {
+    private static void preventHiddenEnchants(ItemStack itemStack, Consumer<ItemEnchantments.Mutable> consumer, CallbackInfoReturnable<ItemEnchantments> cir, @Local(name = "mutableEnchantments") ItemEnchantments.Mutable mutableEnchantments) {
         mutableEnchantments.removeIf(holder -> holder.unwrapKey().map(key -> !CONFIG.isEnchantAllowed(key.identifier())).orElse(false));
     }
 
