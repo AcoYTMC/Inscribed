@@ -7,6 +7,7 @@ import net.kognition.inscribed.impl.index.ModBlocks;
 import net.kognition.inscribed.impl.index.ModItems;
 import net.kognition.inscribed.impl.index.ModSounds;
 import net.kognition.inscribed.impl.index.ModStats;
+import net.kognition.inscribed.impl.index.data.ModEnchantments;
 import net.kognition.inscribed.impl.index.tag.ModItemTags;
 import net.kognition.inscribed.impl.util.data.PearlCategory;
 import net.minecraft.core.HolderLookup;
@@ -27,6 +28,8 @@ public class ModLanguageProvider extends FabricLanguageProvider {
         ModStats.STATS.registerLang(provider, builder);
 
         ModItemTags.BUILDER.registerLang(provider, builder);
+
+        ModEnchantments.BUILDER.functions.keySet().forEach((key) -> builder.addEnchantment(key, MiscUtils.formatString(key.identifier().getPath())));
 
         builder.add("container.inscribed.rune_weaver", "Rune Weaver");
 

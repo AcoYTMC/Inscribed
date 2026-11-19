@@ -1,6 +1,13 @@
 {
   "block.inscribed.rune_weaver": "Rune Weaver",
   "container.inscribed.rune_weaver": "Rune Weaver",
+  "enchantment.inscribed.hunter": "Hunter",
+  "enchantment.inscribed.lasso": "Lasso",
+  "enchantment.inscribed.ricoshatter": "Ricoshatter",
+  "enchantment.inscribed.siphon": "Siphon",
+  "enchantment.inscribed.thrust": "Thrust",
+  "enchantment.inscribed.vendetta": "Vendetta",
+  "enchantment.inscribed.weaving": "Weaving",
   "inscribed.category.dexterity": "Dexterity",
   "inscribed.category.dexterity.amber": "Amber",
   "inscribed.category.dexterity.gold": "Gold",
