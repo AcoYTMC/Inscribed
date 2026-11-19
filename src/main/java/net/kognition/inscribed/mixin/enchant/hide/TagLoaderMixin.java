@@ -1,4 +1,4 @@
-package net.kognition.inscribed.mixin.enchant;
+package net.kognition.inscribed.mixin.enchant.hide;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.tags.TagEntry;
@@ -24,7 +24,7 @@ public class TagLoaderMixin {
     @ModifyExpressionValue(method = "load", at = @At(value = "INVOKE", target = "Lnet/minecraft/tags/TagFile;entries()Ljava/util/List;"))
     List<TagEntry> addTagEntries(List<TagEntry> original) {
         if (directory.equals("tags/enchantment")) {
-            return original.stream().filter(tagEntry -> tagEntry instanceof TagEntryAccessor entry && (entry.inscribed$isTag() || CONFIG.enchantmentAllowlist.contains(entry.inscribed$getId()))).toList();
+            return original.stream().filter(tagEntry -> tagEntry instanceof TagEntryAccessor entry && (entry.inscribed$isTag() || CONFIG.isEnchantAllowed(entry.inscribed$getId()))).toList();
         }
         return original;
     }

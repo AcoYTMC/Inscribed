@@ -8,11 +8,11 @@
         "FeatureElementMixin",
         "PlayerMixin",
         "ToolMaterialMixin",
-        "enchant.MappedRegistryMixin",
-        "enchant.RegistryLoadTaskPendingRegistrationMixin",
-        "enchant.SetEnchantmentsFunctionMixin",
-        "enchant.TagEntryAccessor",
-        "enchant.TagLoaderMixin"
+        "enchant.hide.CreativeModeTabsMixin",
+        "enchant.hide.EnchantmentHelperMixin",
+        "enchant.hide.ResourceArgumentMixin",
+        "enchant.hide.TagEntryAccessor",
+        "enchant.hide.TagLoaderMixin"
     ],
     "client": [
         "client.GuiGraphicsExtractorMixin"

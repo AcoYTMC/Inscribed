@@ -1,4 +1,4 @@
-package net.kognition.inscribed.mixin.enchant;
+package net.kognition.inscribed.mixin.enchant.hide;
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagEntry;

@@ -24,11 +24,15 @@ public class InscribedConfig extends Config {
         super(id("%s_common".formatted(MOD_ID)));
     }
 
+    public ValidatedSet<String> namespaceDenylist = ValidatedSet.ofString("minecraft");
 
     public ValidatedSet<Identifier> enchantmentAllowlist = ValidatedIdentifier.ofDynamicKey(id("empty"), Registries.ENCHANTMENT, "insc_enchantment_allowlist", (_) -> true).toSet(DEFAULT_ENCHANTS);
 
+    public boolean isEnchantAllowed(Identifier id) {
+        return !namespaceDenylist.contains(id.getNamespace()) || enchantmentAllowlist.contains(id);
+    }
+
     public static Set<Identifier> DEFAULT_ENCHANTS = Stream.of(
-            Enchantments.FORTUNE,
             Enchantments.SILK_TOUCH
     ).map(ResourceKey::identifier).collect(Collectors.toSet());
 
