@@ -8,8 +8,8 @@
         "FeatureElementMixin",
         "PlayerMixin",
         "ToolMaterialMixin",
+        "enchant.EnchantmentHelperMixin",
         "enchant.hide.CreativeModeTabsMixin",
-        "enchant.hide.EnchantmentHelperMixin",
         "enchant.hide.ResourceArgumentMixin",
         "enchant.hide.TagEntryAccessor",
         "enchant.hide.TagLoaderMixin"
@@ -19,5 +19,5 @@
     ],
     "injectors": {
         "defaultRequire": 1
-  }
+    }
 }
