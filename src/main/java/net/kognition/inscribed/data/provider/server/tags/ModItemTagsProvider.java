@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.kognition.inscribed.impl.index.ref.ModItemIds;
 import net.kognition.inscribed.impl.index.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
 
@@ -54,5 +55,9 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
                 .forceAddTag(ConventionalItemTags.TRIDENT_TOOLS)
                 .forceAddTag(ConventionalItemTags.MACE_TOOLS)
                 .forceAddTag(ItemTags.SPEARS);
+
+        this.builder(ModItemTags.SPIKE_PROJECTILE)
+                .add(BlockItemIds.POINTED_DRIPSTONE)
+                .add(BlockItemIds.SULFUR_SPIKE);
     }
 }

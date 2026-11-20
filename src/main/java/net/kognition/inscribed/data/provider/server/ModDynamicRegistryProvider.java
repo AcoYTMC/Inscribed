@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.data.ModBlockTransformers;
+import net.kognition.inscribed.impl.index.data.ModDamageTypes;
 import net.kognition.inscribed.impl.index.data.ModPearlTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -22,6 +23,7 @@ public class ModDynamicRegistryProvider extends FabricDynamicRegistryProvider {
         ModBlockTransformers.BUILDER.addEntries(provider, entries);
         entries.addAll(provider.lookupOrThrow(Registries.ENCHANTMENT));
         ModPearlTypes.BUILDER.addEntries(provider, entries);
+        ModDamageTypes.BUILDER.addEntries(provider, entries);
     }
 
     public String getName() {

@@ -3,10 +3,7 @@ package net.kognition.inscribed.data.provider.client;
 import net.acoyt.acornlib.api.util.MiscUtils;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.kognition.inscribed.impl.index.ModBlocks;
-import net.kognition.inscribed.impl.index.ModItems;
-import net.kognition.inscribed.impl.index.ModSounds;
-import net.kognition.inscribed.impl.index.ModStats;
+import net.kognition.inscribed.impl.index.*;
 import net.kognition.inscribed.impl.index.data.ModEnchantments;
 import net.kognition.inscribed.impl.index.tag.ModItemTags;
 import net.kognition.inscribed.impl.util.data.PearlCategory;
@@ -25,6 +22,7 @@ public class ModLanguageProvider extends FabricLanguageProvider {
     public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder builder) {
         ModBlocks.BLOCKS.registerLang(provider, builder);
         ModItems.ITEMS.registerLang(provider, builder);
+        ModEntities.ENTITIES.registerLang(provider, builder);
         ModStats.STATS.registerLang(provider, builder);
 
         ModItemTags.BUILDER.registerLang(provider, builder);

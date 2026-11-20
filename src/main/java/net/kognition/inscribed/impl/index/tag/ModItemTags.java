@@ -19,4 +19,6 @@ public interface ModItemTags {
     TagKey<Item> PRESERVATION_PROVIDER = BUILDER.register("preservation_provider");
     TagKey<Item> RESTORATION_PROVIDER = BUILDER.register("restoration_provider");
     TagKey<Item> RIGOROUS_PROVIDER = BUILDER.register("rigorous_provider");
+
+    TagKey<Item> SPIKE_PROJECTILE = BUILDER.register("spike_projectile");
 }

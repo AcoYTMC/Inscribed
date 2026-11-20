@@ -1,4 +1,4 @@
-package net.kognition.inscribed.impl.client.entity.state;
+package net.kognition.inscribed.impl.client.renderer.blockentity.state;
 
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.item.ItemStackRenderState;

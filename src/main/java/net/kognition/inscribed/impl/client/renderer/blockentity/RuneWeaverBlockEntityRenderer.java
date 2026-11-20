@@ -1,9 +1,9 @@
-package net.kognition.inscribed.impl.client.entity.render;
+package net.kognition.inscribed.impl.client.renderer.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.kognition.inscribed.impl.block.entity.RuneWeaverBlockEntity;
-import net.kognition.inscribed.impl.client.entity.state.RuneWeaverBlockEntityRenderState;
+import net.kognition.inscribed.impl.client.renderer.blockentity.state.RuneWeaverBlockEntityRenderState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

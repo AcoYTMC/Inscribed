@@ -36,6 +36,7 @@ public class Inscribed implements ModInitializer {
         ModMenuTypes.init();
         ModSounds.init();
         ModStats.init();
+        ModEntities.init();
 
         // Networking
         ModNetworking.registerCommon();

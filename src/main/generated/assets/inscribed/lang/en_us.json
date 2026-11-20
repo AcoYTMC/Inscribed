@@ -8,6 +8,7 @@
   "enchantment.inscribed.thrust": "Thrust",
   "enchantment.inscribed.vendetta": "Vendetta",
   "enchantment.inscribed.weaving": "Weaving",
+  "entity.inscribed.spike": "Spike",
   "inscribed.category.dexterity": "Dexterity",
   "inscribed.category.dexterity.amber": "Amber",
   "inscribed.category.dexterity.gold": "Gold",
@@ -49,5 +50,6 @@
   "tag.item.inscribed.removed": "Removed",
   "tag.item.inscribed.restoration_provider": "Restoration Provider",
   "tag.item.inscribed.rigorous_provider": "Rigorous Provider",
+  "tag.item.inscribed.spike_projectile": "Spike Projectile",
   "tooltip.inscribed.pearl_category": "%s | %s"
 }

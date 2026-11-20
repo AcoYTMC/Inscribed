@@ -7,16 +7,19 @@ import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.kognition.inscribed.impl.client.ModItemTooltips;
-import net.kognition.inscribed.impl.client.entity.render.RuneWeaverBlockEntityRenderer;
+import net.kognition.inscribed.impl.client.renderer.blockentity.RuneWeaverBlockEntityRenderer;
 import net.kognition.inscribed.impl.client.item.select.ClusteredProperty;
 import net.kognition.inscribed.impl.client.item.select.RuneData;
 import net.kognition.inscribed.impl.client.math_type.ModMathInit;
+import net.kognition.inscribed.impl.client.renderer.entity.SpikeProjectileRenderer;
 import net.kognition.inscribed.impl.client.screen.RuneWeaverScreen;
 import net.kognition.inscribed.impl.index.ModBlockEntities;
+import net.kognition.inscribed.impl.index.ModEntities;
 import net.kognition.inscribed.impl.index.ModMenuTypes;
 import net.kognition.inscribed.impl.networking.ModNetworking;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperties;
 import net.minecraft.network.chat.Component;
 
@@ -27,6 +30,7 @@ public class InscribedClient implements ClientModInitializer {
         MenuScreens.register(ModMenuTypes.RUNE_WEAVER, RuneWeaverScreen::new);
 
         BlockEntityRenderers.register(ModBlockEntities.RUNE_WEAVER, RuneWeaverBlockEntityRenderer::new);
+        EntityRenderers.register(ModEntities.SPIKE, SpikeProjectileRenderer::new);
 
         SelectItemModelProperties.ID_MAPPER.put(RuneData.ID, RuneData.TYPE);
         SelectItemModelProperties.ID_MAPPER.put(ClusteredProperty.ID, ClusteredProperty.TYPE);
