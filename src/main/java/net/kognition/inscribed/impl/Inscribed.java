@@ -31,6 +31,7 @@ public class Inscribed implements ModInitializer {
         ModBlocks.init();
         ModCreativeModeTabs.init();
         ModDataComponents.init();
+        ModEnchantmentEffectComponents.init();
         ModItems.init();
         ModMenuTypes.init();
         ModSounds.init();

@@ -6,12 +6,12 @@ import net.kognition.inscribed.data.provider.client.ModLanguageProvider;
 import net.kognition.inscribed.data.provider.client.ModModelProvider;
 import net.kognition.inscribed.data.provider.client.ModSoundsProvider;
 import net.kognition.inscribed.data.provider.server.ModDynamicRegistryProvider;
+import net.kognition.inscribed.data.provider.server.ModEnchantmentProvider;
 import net.kognition.inscribed.data.provider.server.ModRecipeProvider;
 import net.kognition.inscribed.data.provider.server.tags.ModBlockTagsProvider;
 import net.kognition.inscribed.data.provider.server.tags.ModItemTagsProvider;
 import net.kognition.inscribed.impl.Inscribed;
 import net.kognition.inscribed.impl.index.data.ModBlockTransformers;
-import net.kognition.inscribed.impl.index.data.ModEnchantments;
 import net.kognition.inscribed.impl.index.data.ModPearlTypes;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -36,7 +36,7 @@ public class InscribedDatagen implements DataGeneratorEntrypoint {
 
     public void buildRegistry(RegistrySetBuilder builder) {
         builder.add(Registries.BLOCK_TRANSFORMER, ModBlockTransformers.BUILDER::bootstrap);
-        builder.add(Registries.ENCHANTMENT, ModEnchantments.BUILDER::bootstrap);
+        builder.add(Registries.ENCHANTMENT, ModEnchantmentProvider::bootstrap);
         builder.add(Inscribed.PEARL_DATA_KEY, ModPearlTypes.BUILDER::bootstrap);
     }
 }

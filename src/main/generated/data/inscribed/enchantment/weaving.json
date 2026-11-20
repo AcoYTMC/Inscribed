@@ -3,6 +3,9 @@
   "description": {
     "translate": "enchantment.inscribed.weaving"
   },
+  "effects": {
+    "inscribed:weaving": {}
+  },
   "max_cost": {
     "base": 65,
     "per_level_above_first": 0

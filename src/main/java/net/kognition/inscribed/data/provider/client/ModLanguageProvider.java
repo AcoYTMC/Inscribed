@@ -29,7 +29,7 @@ public class ModLanguageProvider extends FabricLanguageProvider {
 
         ModItemTags.BUILDER.registerLang(provider, builder);
 
-        ModEnchantments.BUILDER.functions.keySet().forEach((key) -> builder.addEnchantment(key, MiscUtils.formatString(key.identifier().getPath())));
+        ModEnchantments.ENCHANTMENTS.forEach((key) -> builder.addEnchantment(key, MiscUtils.formatString(key.identifier().getPath())));
 
         builder.add("container.inscribed.rune_weaver", "Rune Weaver");
 
